@@ -10,7 +10,7 @@ type AccountAccessFormProps = {
 };
 
 const inputClass =
-  "mt-2 h-13 w-full rounded-lg border border-[#e1e2e5] bg-white px-4 text-[14px] text-[#25262a] outline-none transition placeholder:text-[#9a9ba0] focus:border-[#ed171d] focus:ring-3 focus:ring-[#ed171d]/10";
+  "mt-2 h-13 w-full rounded-lg border border-[#e1e2e5] bg-white px-4 text-[14px] text-[#25262a] outline-none transition placeholder:text-[#9a9ba0] focus:border-[#163e6a] focus:ring-3 focus:ring-[#163e6a]/10";
 
 export function AccountAccessForm({ mode }: AccountAccessFormProps) {
   const isLogin = mode === "login";
@@ -55,7 +55,7 @@ export function AccountAccessForm({ mode }: AccountAccessFormProps) {
 
           <div className="flex items-center px-[clamp(26px,5vw,64px)] py-12 max-[760px]:py-9">
             <div className="w-full max-w-115">
-              <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.15em] text-[#ed171d]">
+              <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.15em] text-[#163e6a]">
                 {isLogin ? "Account access" : "Account recovery"}
               </p>
               <h1 className="m-0 text-[clamp(29px,3vw,38px)] font-semibold leading-tight text-[#202126]">
@@ -88,7 +88,7 @@ export function AccountAccessForm({ mode }: AccountAccessFormProps) {
                   <label className="block text-[13px] font-medium text-[#45464b]" htmlFor="account-password">
                     <span className="flex items-center justify-between gap-3">
                       <span>Password</span>
-                      <Link className="text-[12px] font-medium text-[#d9141c] hover:underline" href="/forgot-password">Forgot password?</Link>
+                      <Link className="text-[12px] font-medium text-[#ec8123] hover:underline" href="/forgot-password">Forgot password?</Link>
                     </span>
                     <span className="relative mt-2 block">
                       <LockKeyhole className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-[#999aa0]" aria-hidden="true" />
@@ -115,7 +115,7 @@ export function AccountAccessForm({ mode }: AccountAccessFormProps) {
                   </label>
                 )}
 
-                <button className="mt-1 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#ed171d] px-5 text-[14px] font-semibold text-white transition hover:bg-[#c90d13]" type="submit">
+                <button className="mt-1 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#163e6a] px-5 text-[14px] font-semibold text-white transition hover:bg-[#ec8123]" type="submit">
                   {isLogin ? "Log in" : "Send reset instructions"}
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </button>
@@ -125,9 +125,9 @@ export function AccountAccessForm({ mode }: AccountAccessFormProps) {
 
               <div className="mt-6 border-t border-[#eeeeef] pt-5 text-[13px] text-[#77787e]">
                 {isLogin ? (
-                  <p className="m-0">New to XPS? <Link className="font-semibold text-[#d9141c] hover:underline" href="/register">Create a business account</Link></p>
+                  <p className="m-0">New to XPS? <Link className="font-semibold text-[#ec8123] hover:underline" href="/register">Create a business account</Link></p>
                 ) : (
-                  <Link className="inline-flex items-center gap-2 font-medium text-[#55565c] hover:text-[#d9141c]" href="/login"><ArrowLeft className="size-4" aria-hidden="true" /> Back to login</Link>
+                  <Link className="inline-flex items-center gap-2 font-medium text-[#55565c] hover:text-[#ec8123]" href="/login"><ArrowLeft className="size-4" aria-hidden="true" /> Back to login</Link>
                 )}
               </div>
             </div>

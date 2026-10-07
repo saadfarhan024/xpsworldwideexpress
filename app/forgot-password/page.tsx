@@ -13,7 +13,7 @@ export default function ForgotPasswordPage() {
     <main>
       <SiteHeader />
       <section
-        className="relative grid min-h-75 place-items-center overflow-hidden bg-cover bg-center px-5 pb-6 pt-30 text-center text-white max-[760px]:min-h-65"
+        className="relative grid min-h-75 place-items-center overflow-hidden bg-cover bg-center px-5 pb-6 pt-30 text-center text-white max-[760px]:min-h-56 max-[760px]:pt-22"
         style={{
           backgroundImage:
             "linear-gradient(90deg,rgba(10,11,14,0.8),rgba(10,11,14,0.72)),url(https://xpsworldwideexpress.pk/img/Shiping-Truck.jpg)",

@@ -76,7 +76,7 @@ export default function WhyCarousel() {
         {slides.map((slide, index) => (
           <button
             key={slide.image}
-            className={`size-2 rounded-full ${index === activeSlide ? "bg-[#ed171d]" : "bg-white/60"}`}
+            className={`size-2 rounded-full ${index === activeSlide ? "bg-[#163e6a]" : "bg-white/60"}`}
             type="button"
             aria-label={`Show image ${index + 1}`}
             aria-current={index === activeSlide ? "true" : undefined}

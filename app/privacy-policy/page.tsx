@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 
 const sectionHeading = "mb-3 mt-9 text-[21px] font-semibold leading-snug text-[#222328] first:mt-0";
 const paragraph = "mb-4 text-[15px] leading-[1.85] text-[#5b5c62]";
-const list = "mb-5 list-disc space-y-2 pl-6 text-[15px] leading-[1.8] text-[#5b5c62] marker:text-[#ed171d]";
-const linkClass = "text-[#d9141c] underline decoration-[#d9141c]/30 underline-offset-4 hover:decoration-[#d9141c]";
+const list = "mb-5 list-disc space-y-2 pl-6 text-[15px] leading-[1.8] text-[#5b5c62] marker:text-[#163e6a]";
+const linkClass = "text-[#ec8123] underline decoration-[#ec8123]/30 underline-offset-4 hover:decoration-[#ec8123]";
 
 export default function PrivacyPolicyPage() {
   return (
     <main>
       <SiteHeader />
-      <section className="relative grid min-h-75 place-items-center overflow-hidden bg-[linear-gradient(120deg,#302d2d,#080809_68%)] px-5 pb-6 pt-30 text-center text-white max-[760px]:min-h-65">
+      <section className="relative grid min-h-75 place-items-center overflow-hidden bg-[linear-gradient(120deg,#302d2d,#080809_68%)] px-5 pb-6 pt-30 text-center text-white max-[760px]:min-h-56 max-[760px]:pt-22">
         <div className="pointer-events-none absolute -left-20 top-4 size-64 rounded-full bg-white/5 blur-2xl" />
         <div className="pointer-events-none absolute -right-16 top-0 size-72 rounded-full bg-white/5 blur-2xl" />
         <div className="relative">
@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
       </section>
 
       <article className={`${pageWrap} max-w-210 py-18 max-[760px]:py-12`}>
-        <p className="mb-8 border-l-3 border-[#ed171d] pl-4 text-[16px] font-medium leading-[1.8] text-[#34353a]">
+        <p className="mb-8 border-l-3 border-[#163e6a] pl-4 text-[16px] font-medium leading-[1.8] text-[#34353a]">
           XPS Worldwide Express Service Privacy Policy
         </p>
 

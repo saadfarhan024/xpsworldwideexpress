@@ -9,6 +9,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
@@ -19,10 +20,11 @@
 :root {
   --background: #fff;
   --foreground: #171717;
-  --primary: #ed171d;
+  --primary: #163e6a;
   --primary-foreground: #fff;
+  --accent: #ec8123;
   --border: #e4e4e7;
-  --ring: #ed171d;
+  --ring: #163e6a;
   --radius: 0.35rem;
 }
 
@@ -43,10 +45,20 @@
     @apply no-underline;
   }
 
-  a:focus-visible,
-  button:focus-visible {
+  a:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 3px;
     border-radius: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

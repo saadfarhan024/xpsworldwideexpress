@@ -58,7 +58,7 @@ const steps = [
 ];
 
 const inputClass =
-  "mt-2 h-12.5 w-full rounded-lg border border-[#e1e2e5] bg-white px-4 text-[14px] text-[#25262a] outline-none transition placeholder:text-[#9a9ba0] focus:border-[#ed171d] focus:ring-3 focus:ring-[#ed171d]/10";
+  "mt-2 h-12.5 w-full rounded-lg border border-[#e1e2e5] bg-white px-4 text-[14px] text-[#25262a] outline-none transition placeholder:text-[#9a9ba0] focus:border-[#163e6a] focus:ring-3 focus:ring-[#163e6a]/10";
 const labelClass = "block text-[13px] font-medium text-[#45464b]";
 
 function TextField({
@@ -84,7 +84,7 @@ function TextField({
 }) {
   return (
     <label className={labelClass} htmlFor={id}>
-      {label}{required && <span className="ml-1 text-[#ed171d]" aria-hidden="true">*</span>}
+      {label}{required && <span className="ml-1 text-[#163e6a]" aria-hidden="true">*</span>}
       <input
         className={`${inputClass} ${error ? "border-[#d7262e]" : ""}`}
         id={id}
@@ -123,7 +123,7 @@ function SelectField({
 }) {
   return (
     <label className={labelClass} htmlFor={id}>
-      {label}{required && <span className="ml-1 text-[#ed171d]" aria-hidden="true">*</span>}
+      {label}{required && <span className="ml-1 text-[#163e6a]" aria-hidden="true">*</span>}
       <select
         className={`${inputClass} appearance-none ${value ? "" : "text-[#9a9ba0]"} ${error ? "border-[#d7262e]" : ""}`}
         id={id}
@@ -209,10 +209,10 @@ export function RegisterForm() {
     <section className="bg-[#f6f6f7] py-16 max-[760px]:py-10">
       <div className={`${pageWrap} max-w-230`}>
         <div className="mx-auto mb-8 max-w-170 text-center">
-          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[#ed171d]">Join our delivery network</p>
+          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[#163e6a]">Join our delivery network</p>
           <h2 className="m-0 text-[clamp(29px,3.5vw,42px)] font-medium leading-tight text-[#1c1d21]">Create your business account</h2>
           <p className="mb-0 mt-3 text-[14px] leading-6 text-[#6a6b71]">Complete a few details so we can tailor shipping services to your business.</p>
-          <p className="mb-0 mt-2 text-[12px] text-[#77787e]">Fields marked <span className="font-semibold text-[#ed171d]">*</span> are required.</p>
+          <p className="mb-0 mt-2 text-[12px] text-[#77787e]">Fields marked <span className="font-semibold text-[#163e6a]">*</span> are required.</p>
         </div>
 
         <div className="mb-7 grid grid-cols-4 rounded-2xl border border-[#e9e9eb] bg-white p-2 shadow-[0_8px_28px_rgba(20,20,30,0.04)] max-[650px]:grid-cols-2 max-[650px]:gap-1.5">
@@ -220,8 +220,8 @@ export function RegisterForm() {
             const active = index === step;
             const complete = index < step;
             return (
-              <div className={`flex min-h-21 items-center gap-3 rounded-xl px-3.5 py-3 transition ${active ? "bg-[#fff1f1]" : ""} max-[650px]:min-h-17`} aria-current={active ? "step" : undefined} key={title}>
-                <span className={`grid size-10 shrink-0 place-items-center rounded-full ${complete ? "bg-[#ed171d] text-white" : active ? "bg-[#ed171d] text-white" : "bg-[#f0f0f2] text-[#77787e]"}`}>
+              <div className={`flex min-h-21 items-center gap-3 rounded-xl px-3.5 py-3 transition ${active ? "bg-[#fff3e8]" : ""} max-[650px]:min-h-17`} aria-current={active ? "step" : undefined} key={title}>
+                <span className={`grid size-10 shrink-0 place-items-center rounded-full ${complete ? "bg-[#163e6a] text-white" : active ? "bg-[#163e6a] text-white" : "bg-[#f0f0f2] text-[#77787e]"}`}>
                   {complete ? <Check className="size-4.5" aria-hidden="true" /> : <Icon className="size-4.5" aria-hidden="true" />}
                 </span>
                 <span className="min-w-0">
@@ -249,14 +249,14 @@ export function RegisterForm() {
               <TextField id="phone" label="Phone" value={values.phone} onChange={updateValue} error={errors.phone} type="tel" required autoComplete="tel" />
               <TextField id="email" label="Email" value={values.email} onChange={updateValue} error={errors.email} type="email" required autoComplete="email" />
               <label className={`${labelClass} col-span-2 max-[600px]:col-span-1`} htmlFor="pickupAddress">
-                Company / pickup address<span className="ml-1 text-[#ed171d]" aria-hidden="true">*</span>
+                Company / pickup address<span className="ml-1 text-[#163e6a]" aria-hidden="true">*</span>
                 <textarea className={`${inputClass} min-h-25 resize-y py-3`} id="pickupAddress" name="pickupAddress" value={values.pickupAddress} onChange={(event) => updateValue("pickupAddress", event.target.value)} placeholder="Enter the address where shipments will be collected" required aria-required="true" aria-invalid={Boolean(errors.pickupAddress)} aria-describedby={errors.pickupAddress ? "pickupAddress-error" : undefined} />
                 {errors.pickupAddress && <span id="pickupAddress-error" className="mt-1 block text-xs text-[#c31d25]" role="alert">{errors.pickupAddress}</span>}
               </label>
               <label className="col-span-2 block max-[600px]:col-span-1">
                 <span className={labelClass}>Company logo <span className="font-normal text-[#898a90]">(optional)</span></span>
-                <span className="mt-2 flex min-h-14 cursor-pointer items-center gap-3 rounded-lg border border-dashed border-[#d7d8dc] bg-[#fbfbfc] px-4 text-[13px] text-[#686970] transition hover:border-[#ed171d]">
-                  <Upload className="size-4.5 text-[#ed171d]" aria-hidden="true" />
+                <span className="mt-2 flex min-h-14 cursor-pointer items-center gap-3 rounded-lg border border-dashed border-[#d7d8dc] bg-[#fbfbfc] px-4 text-[13px] text-[#686970] transition hover:border-[#163e6a]">
+                  <Upload className="size-4.5 text-[#163e6a]" aria-hidden="true" />
                   <span>{logoFile?.name || "Choose a logo image (PNG, JPG, or SVG)"}</span>
                   <input className="sr-only" name="logo" type="file" accept="image/png,image/jpeg,image/svg+xml" onChange={(event) => setLogoFile(event.target.files?.[0] ?? null)} />
                 </span>
@@ -301,11 +301,11 @@ export function RegisterForm() {
               </button>
             ) : <span />}
             {step < steps.length - 1 ? (
-              <button className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#ed171d] px-5 text-[13px] font-semibold text-white transition hover:bg-[#c90d13]" type="button" onClick={continueStep}>
+              <button className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#163e6a] px-5 text-[13px] font-semibold text-white transition hover:bg-[#ec8123]" type="button" onClick={continueStep}>
                 Continue <ArrowRight className="size-4" aria-hidden="true" />
               </button>
             ) : (
-              <button className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#ed171d] px-5 text-[13px] font-semibold text-white transition hover:bg-[#c90d13]" type="submit">
+              <button className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#163e6a] px-5 text-[13px] font-semibold text-white transition hover:bg-[#ec8123]" type="submit">
                 Create account <Check className="size-4" aria-hidden="true" />
               </button>
             )}

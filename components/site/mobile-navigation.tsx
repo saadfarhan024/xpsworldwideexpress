@@ -54,7 +54,7 @@ export function MobileNavigation({
               key={link.label}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="border-b border-neutral-200 py-4 text-lg font-semibold text-neutral-800 transition-colors hover:text-[#ed171d]"
+              className="border-b border-neutral-200 py-4 text-lg font-semibold text-neutral-800 transition-colors hover:text-[#163e6a]"
             >
               {link.label}
             </a>

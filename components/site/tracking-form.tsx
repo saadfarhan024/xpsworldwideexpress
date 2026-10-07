@@ -32,7 +32,7 @@ export function TrackingForm() {
     <section className="bg-[#f6f6f7] px-5 py-18 max-[760px]:py-12">
       <div className="mx-auto max-w-175 rounded-2xl border border-[#e8e8eb] bg-white p-[clamp(24px,5vw,52px)] shadow-[0_16px_48px_rgba(23,24,30,0.08)]">
         <div className="mb-7 flex items-start gap-4">
-          <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-[#fff0f1] text-[#ed171d]">
+          <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-[#fff3e8] text-[#163e6a]">
             <PackageSearch className="size-6" aria-hidden="true" />
           </span>
           <div>
@@ -46,7 +46,7 @@ export function TrackingForm() {
         <form className="grid gap-4" onSubmit={handleSubmit}>
           <label className="sr-only" htmlFor="tracking-numbers">Enter your Tracking Code</label>
           <textarea
-            className="min-h-28 w-full resize-y rounded-xl border border-[#dedfe2] bg-white px-4 py-3.5 text-[15px] text-[#25262a] outline-none transition placeholder:text-[#999aa0] focus:border-[#ed171d] focus:ring-3 focus:ring-[#ed171d]/10"
+            className="min-h-28 w-full resize-y rounded-xl border border-[#dedfe2] bg-white px-4 py-3.5 text-[15px] text-[#25262a] outline-none transition placeholder:text-[#999aa0] focus:border-[#163e6a] focus:ring-3 focus:ring-[#163e6a]/10"
             id="tracking-numbers"
             name="trackingNumbers"
             value={trackingNumbers}
@@ -56,7 +56,7 @@ export function TrackingForm() {
             aria-invalid={isError}
             required
           />
-          <button className="inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-lg bg-[#ed171d] px-5 text-[14px] font-bold tracking-[0.04em] text-white transition hover:bg-[#c90d13] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#ed171d]" type="submit">
+          <button className="inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-lg bg-[#163e6a] px-5 text-[14px] font-bold tracking-[0.04em] text-white transition hover:bg-[#ec8123] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#163e6a]" type="submit">
             TRACK YOUR PACKAGE <ArrowRight className="size-4" aria-hidden="true" />
           </button>
         </form>

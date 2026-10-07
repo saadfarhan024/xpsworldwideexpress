@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Clock3, PackageCheck, ShieldCheck } from "lucide-react";
-import { pageWrap, redEyebrow } from "@/components/site/styles";
+import { pageWrap, orangeEyebrow } from "@/components/site/styles";
 import { ScrollReveal } from "@/components/site/scroll-reveal";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
@@ -85,13 +85,13 @@ export default function ServicesPage() {
       <SiteHeader />
       <section
         id="services-hero"
-        className="relative grid h-[52svh] min-h-110 max-h-170 place-items-center bg-cover bg-[center_48%] text-white max-[760px]:h-[62svh] max-[760px]:min-h-120"
+        className="relative grid h-[52svh] min-h-110 max-h-170 place-items-center bg-cover bg-[center_48%] text-white max-[760px]:h-[44svh] max-[760px]:min-h-64"
         style={{
           backgroundImage:
             "linear-gradient(90deg,rgba(9,10,12,0.68),rgba(9,10,12,0.55)),url(https://xpsworldwideexpress.pk/img/theme_image_02.jpg)",
         }}
       >
-        <div className="relative z-10 px-5 pt-24 text-center">
+        <div className="relative z-10 px-5 pt-24 text-center max-[760px]:pt-20">
           <h1 className="m-0 text-[clamp(42px,5vw,72px)] font-normal leading-tight text-white">
             Our Services
           </h1>
@@ -113,7 +113,7 @@ export default function ServicesPage() {
                   aria-label={service.alt}
                   style={{ backgroundImage: `url(${service.image})` }}
                 />
-                <h2 className="mb-3 mt-6 text-[clamp(24px,2.5vw,34px)] font-medium text-[#c91b16]">
+                <h2 className="mb-3 mt-6 text-[clamp(24px,2.5vw,34px)] font-medium text-[#ec8123]">
                   {service.title}
                 </h2>
                 <p className="mx-auto mb-0 max-w-[38ch] text-[15px] leading-[1.7] text-neutral-600">
@@ -129,9 +129,9 @@ export default function ServicesPage() {
         <section className="bg-[#f3f4f5] py-20 max-[760px]:py-14" id="experience">
           <div className={`${pageWrap} grid grid-cols-[.9fr_1.1fr] items-center gap-16 max-[760px]:grid-cols-1 max-[760px]:gap-10`}>
             <div>
-              <p className={redEyebrow}>Experience that moves with you</p>
+              <p className={orangeEyebrow}>Experience that moves with you</p>
               <h2 className="mb-5 mt-0 text-[clamp(34px,4vw,52px)] font-normal leading-tight text-neutral-900">
-                <span className="block text-[clamp(64px,8vw,104px)] font-semibold leading-none text-[#d91d16]">20</span>
+                <span className="block text-[clamp(64px,8vw,104px)] font-semibold leading-none text-[#ec8123]">20</span>
                 Years of Experience
               </h2>
               <p className="mb-0 max-w-[60ch] text-[16px] leading-[1.8] text-neutral-600">
@@ -141,7 +141,7 @@ export default function ServicesPage() {
             <div className="divide-y divide-neutral-300 border-y border-neutral-300">
               {serviceBenefits.map(({ title, description, icon: Icon }) => (
                 <article key={title} className="grid grid-cols-[auto_1fr] gap-5 py-6">
-                  <span className="grid size-12 place-items-center rounded-full bg-white text-[#d91d16]">
+                  <span className="grid size-12 place-items-center rounded-full bg-white text-[#ec8123]">
                     <Icon className="size-5" />
                   </span>
                   <div>

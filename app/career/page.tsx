@@ -26,13 +26,13 @@ export default function CareerPage() {
       <SiteHeader />
       <section
         id="career-hero"
-        className="relative grid h-[52svh] min-h-110 max-h-170 place-items-center bg-cover bg-[center_48%] text-white max-[760px]:h-[62svh] max-[760px]:min-h-120"
+        className="relative grid h-[52svh] min-h-110 max-h-170 place-items-center bg-cover bg-[center_48%] text-white max-[760px]:h-[44svh] max-[760px]:min-h-64"
         style={{
           backgroundImage:
             "linear-gradient(90deg,rgba(9,10,12,0.68),rgba(9,10,12,0.55)),url(https://xpsworldwideexpress.pk/img/breadcrumb-carrier.jpg)",
         }}
       >
-        <div className="relative z-10 px-5 pt-24 text-center">
+        <div className="relative z-10 px-5 pt-24 text-center max-[760px]:pt-20">
           <h1 className="m-0 text-[clamp(42px,5vw,72px)] font-normal leading-tight text-white">
             Careers at XPS
           </h1>
@@ -88,13 +88,13 @@ export default function CareerPage() {
               <ul className="my-6 grid list-none gap-4.5 p-0 text-[16px] leading-[1.8] text-[#515257]">
                 {benefits.map((benefit) => (
                   <li className="flex items-start gap-3.5" key={benefit}>
-                    <FaCircleNotch aria-hidden="true" className="mt-1.5 shrink-0 text-[#c9272c]" />
+                    <FaCircleNotch aria-hidden="true" className="mt-1.5 shrink-0 text-[#ec8123]" />
                     <span>{benefit}</span>
                   </li>
                 ))}
               </ul>
               <a
-                className="inline-flex items-center rounded-md bg-[#ed171d] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#c90d13] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#ed171d]"
+                className="inline-flex items-center rounded-md bg-[#163e6a] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#ec8123] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#163e6a]"
                 href="/contact-us"
               >
                 Ask about career opportunities
