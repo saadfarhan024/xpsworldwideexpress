@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, Upload, Building2, UserRound, Truck, LockKeyhole } from "lucide-react";
 import { pageWrap } from "@/components/site/styles";
 
@@ -149,12 +150,14 @@ export function RegisterForm() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<Partial<Record<ValueKey, string>>>({});
   const [notice, setNotice] = useState("");
+  const [verificationUrl, setVerificationUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const updateValue = (id: ValueKey, value: string) => {
     setValues((current) => ({ ...current, [id]: value }));
     setErrors((current) => ({ ...current, [id]: undefined }));
     setNotice("");
+    setVerificationUrl("");
   };
 
   const validateCurrentStep = () => {
@@ -191,6 +194,7 @@ export function RegisterForm() {
     if (validateCurrentStep()) {
       setStep((current) => Math.min(current + 1, steps.length - 1));
       setNotice("");
+      setVerificationUrl("");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -198,6 +202,7 @@ export function RegisterForm() {
   const goBack = () => {
     setErrors({});
     setNotice("");
+    setVerificationUrl("");
     setStep((current) => Math.max(current - 1, 0));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -207,6 +212,7 @@ export function RegisterForm() {
     if (!validateCurrentStep()) return;
     setIsSubmitting(true);
     setNotice("");
+    setVerificationUrl("");
 
     try {
       const response = await fetch("/api/auth/register", {
@@ -214,8 +220,11 @@ export function RegisterForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-      const result = await response.json() as { message?: string };
+      const result = await response.json() as { message?: string; verificationUrl?: string };
       setNotice(result.message ?? "We could not submit your application. Please try again.");
+      if (result.verificationUrl) {
+        setVerificationUrl(result.verificationUrl);
+      }
     } catch {
       setNotice("We could not connect to the registration service. Please try again.");
     } finally {
@@ -328,7 +337,21 @@ export function RegisterForm() {
               </button>
             )}
           </div>
-          {notice && <p className="mb-0 mt-4 rounded-lg bg-[#fff4e5] px-4 py-3 text-[13px] leading-5 text-[#835813]" role="status">{notice}</p>}
+          {notice && (
+            <div className="mb-0 mt-5 rounded-xl border border-[#ffe0b2] bg-[#fff8f0] p-4 text-[13px] leading-5 text-[#835813]" role="status">
+              <p className="m-0 font-medium">{notice}</p>
+              {verificationUrl && (
+                <div className="mt-3.5">
+                  <Link
+                    href={verificationUrl}
+                    className="inline-flex items-center gap-2 rounded-lg bg-[#163e6a] px-4 py-2.5 text-[12px] font-semibold text-white shadow-xs transition hover:bg-[#ec8123]"
+                  >
+                    Verify Email Now <ArrowRight className="size-3.5" />
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
         </form>
       </div>
     </section>

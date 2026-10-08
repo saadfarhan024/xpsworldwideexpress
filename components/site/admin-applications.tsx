@@ -5,6 +5,8 @@ import { useCallback, useEffect, useState } from "react";
 type Application = {
   id: string;
   email: string;
+  status: string;
+  emailVerifiedAt: string | null;
   createdAt: string;
   merchantProfile: {
     companyName: string;
@@ -51,7 +53,7 @@ export function AdminApplications() {
     };
   }, []);
 
-  const decide = async (application: Application, decision: "approve" | "reject") => {
+  const decide = async (application: Application, decision: "approve" | "reject" | "verify_and_approve") => {
     const reason = decision === "reject" ? window.prompt("Why is this application being rejected?")?.trim() ?? "" : "";
     if (decision === "reject" && !reason) return;
 
@@ -89,15 +91,27 @@ export function AdminApplications() {
           {applications.map((application) => {
             const profile = application.merchantProfile;
             if (!profile) return null;
+            const isUnverified = application.status === "PENDING_EMAIL_VERIFICATION";
             return (
               <article className="rounded-xl border border-[#e5e6e9] bg-white p-5 shadow-[0_6px_20px_rgba(24,25,30,0.035)]" key={application.id}>
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <h3 className="m-0 text-[18px] font-semibold text-[#202126]">{profile.companyName}</h3>
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <h3 className="m-0 text-[18px] font-semibold text-[#202126]">{profile.companyName}</h3>
+                      {isUnverified ? (
+                        <span className="rounded-full bg-amber-50 px-2.5 py-0.5 text-[11px] font-semibold text-amber-800">Unverified Email</span>
+                      ) : (
+                        <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-[11px] font-semibold text-blue-700">Email Verified</span>
+                      )}
+                    </div>
                     <p className="mb-0 mt-1 text-[13px] text-[#686970]">Submitted {new Date(application.createdAt).toLocaleDateString()}</p>
                   </div>
                   <div className="flex gap-2">
-                    <button className="rounded-md bg-[#163e6a] px-3.5 py-2 text-[12px] font-semibold text-white hover:bg-[#102f52] disabled:opacity-60" type="button" disabled={busyId === application.id} onClick={() => decide(application, "approve")}>{busyId === application.id ? "Saving…" : "Approve"}</button>
+                    {isUnverified ? (
+                      <button className="rounded-md bg-[#ec8123] px-3.5 py-2 text-[12px] font-semibold text-white hover:bg-[#d9731b] disabled:opacity-60" type="button" disabled={busyId === application.id} onClick={() => decide(application, "verify_and_approve")}>{busyId === application.id ? "Saving…" : "Verify & Approve"}</button>
+                    ) : (
+                      <button className="rounded-md bg-[#163e6a] px-3.5 py-2 text-[12px] font-semibold text-white hover:bg-[#102f52] disabled:opacity-60" type="button" disabled={busyId === application.id} onClick={() => decide(application, "approve")}>{busyId === application.id ? "Saving…" : "Approve"}</button>
+                    )}
                     <button className="rounded-md border border-red-200 px-3.5 py-2 text-[12px] font-semibold text-red-700 hover:bg-red-50 disabled:opacity-60" type="button" disabled={busyId === application.id} onClick={() => decide(application, "reject")}>Reject</button>
                   </div>
                 </div>

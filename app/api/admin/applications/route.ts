@@ -14,10 +14,12 @@ export async function GET() {
   if (!admin) return NextResponse.json({ message: "Not authorized." }, { status: 403 });
 
   const applications = await prisma.user.findMany({
-    where: { role: "MERCHANT", status: "PENDING_APPROVAL" },
+    where: { role: "MERCHANT", status: { in: ["PENDING_APPROVAL", "PENDING_EMAIL_VERIFICATION"] } },
     select: {
       id: true,
       email: true,
+      status: true,
+      emailVerifiedAt: true,
       createdAt: true,
       merchantProfile: {
         select: {
@@ -33,7 +35,7 @@ export async function GET() {
         },
       },
     },
-    orderBy: { createdAt: "asc" },
+    orderBy: { createdAt: "desc" },
   });
 
   return NextResponse.json({ applications });
@@ -53,15 +55,18 @@ export async function PATCH(request: Request) {
   const userId = typeof input.userId === "string" ? input.userId : "";
   const decision = input.decision;
   const reason = typeof input.reason === "string" ? input.reason.trim().slice(0, 500) : "";
-  if (!userId || (decision !== "approve" && decision !== "reject") || (decision === "reject" && !reason)) {
+  const isApproval = decision === "approve" || decision === "verify_and_approve";
+  if (!userId || (!isApproval && decision !== "reject") || (decision === "reject" && !reason)) {
     return NextResponse.json({ message: "Choose approve or provide a rejection reason." }, { status: 400 });
   }
 
   const application = await prisma.user.findFirst({
-    where: { id: userId, role: "MERCHANT", status: "PENDING_APPROVAL" },
+    where: { id: userId, role: "MERCHANT", status: { in: ["PENDING_APPROVAL", "PENDING_EMAIL_VERIFICATION"] } },
     select: {
       id: true,
       email: true,
+      status: true,
+      emailVerifiedAt: true,
       merchantProfile: { select: { id: true, companyName: true, contactName: true } },
     },
   });
@@ -69,12 +74,15 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ message: "This application is no longer pending." }, { status: 404 });
   }
 
-  const approved = decision === "approve";
+  const approved = isApproval;
   const now = new Date();
   await prisma.$transaction([
     prisma.user.update({
       where: { id: application.id },
-      data: { status: approved ? "ACTIVE" : "REJECTED" },
+      data: {
+        status: approved ? "ACTIVE" : "REJECTED",
+        ...(approved && !application.emailVerifiedAt ? { emailVerifiedAt: now } : {}),
+      },
     }),
     prisma.merchantProfile.update({
       where: { id: application.merchantProfile.id },
@@ -88,7 +96,9 @@ export async function PATCH(request: Request) {
         action: approved ? "MERCHANT_APPLICATION_APPROVED" : "MERCHANT_APPLICATION_REJECTED",
         entityType: "User",
         entityId: application.id,
-        summary: approved ? "Merchant application approved." : `Merchant application rejected: ${reason}`,
+        summary: approved
+          ? `Merchant application approved (previous status: ${application.status}).`
+          : `Merchant application rejected: ${reason}`,
       },
     }),
   ]);
