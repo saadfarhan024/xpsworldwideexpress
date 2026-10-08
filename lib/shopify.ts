@@ -98,7 +98,7 @@ export async function registerShopifyWebhooks(shopDomain: string, accessToken: s
       ...(result.errors || []).map((error) => error.message),
       ...(result.data?.webhookSubscriptionCreate?.userErrors || []).map((error) => error.message),
     ];
-    if (errors.length && !errors.some((error) => /already exists|duplicate/i.test(error))) {
+    if (errors.length && !errors.some((error) => /already exists|duplicate|already been taken/i.test(error))) {
       throw new Error(`Shopify webhook registration failed for ${topic}: ${errors.join("; ")}`);
     }
   }
