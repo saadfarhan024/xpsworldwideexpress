@@ -4,9 +4,9 @@ import { SiteHeader } from "@/components/site/site-header";
 import { pageWrap } from "@/components/site/styles";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | XPS Worldwide Express",
+  title: "Privacy Policy | Go Delivery Express",
   description:
-    "Learn how XPS Worldwide Express Fulfillment Service collects, uses, and shares personal information.",
+    "Learn how Go Delivery Express Fulfillment Service collects, uses, and shares personal information.",
 };
 
 const sectionHeading = "mb-3 mt-9 text-[21px] font-semibold leading-snug text-[#222328] first:mt-0";
@@ -22,18 +22,18 @@ export default function PrivacyPolicyPage() {
         <div className="pointer-events-none absolute -left-20 top-4 size-64 rounded-full bg-white/5 blur-2xl" />
         <div className="pointer-events-none absolute -right-16 top-0 size-72 rounded-full bg-white/5 blur-2xl" />
         <div className="relative">
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/65">XPS Worldwide Express</p>
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/65">Go Delivery Express</p>
           <h1 className="m-0 text-[clamp(38px,5vw,60px)] font-medium leading-tight">Privacy Policy</h1>
         </div>
       </section>
 
       <article className={`${pageWrap} max-w-210 py-18 max-[760px]:py-12`}>
         <p className="mb-8 border-l-3 border-[#163e6a] pl-4 text-[16px] font-medium leading-[1.8] text-[#34353a]">
-          XPS Worldwide Express Service Privacy Policy
+          Go Delivery Express Service Privacy Policy
         </p>
 
         <p className={paragraph}>
-          XPS Worldwide Express Fulfillment Service (“the App”) provides comprehensive fulfillment and shipping services (“the Service”) to merchants who use Shopify to power their stores. This Privacy Policy describes how personal information is collected, used, and shared when you install or use the App in connection with your Shopify-supported store.
+          Go Delivery Express Fulfillment Service (“the App”) provides comprehensive fulfillment and shipping services (“the Service”) to merchants who use Shopify to power their stores. This Privacy Policy describes how personal information is collected, used, and shared when you install or use the App in connection with your Shopify-supported store.
         </p>
 
         <h2 className={sectionHeading}>Personal Information the App Collects</h2>
@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
 
         <h2 className={sectionHeading}>Contact Us</h2>
         <p className={paragraph}>
-          For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at <a className={linkClass} href="mailto:info@xpsworldwideexpress.pk">info@xpsworldwideexpress.pk</a> or by mail using the details provided below:
+          For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at <a className={linkClass} href="mailto:info@godeliveryexpress.pk">info@godeliveryexpress.pk</a> or by mail using the details provided below:
         </p>
         <address className="not-italic text-[15px] leading-[1.8] text-[#5b5c62]">
           Shop-40 Liaqat Market<br />

@@ -75,7 +75,7 @@ export function NewTicketForm() {
                 className={inputClass}
                 value={trackingCode}
                 onChange={(e) => setTrackingCode(e.target.value)}
-                placeholder="e.g. XPS-A1B2C3D4E5F6"
+                placeholder="e.g. GDE-A1B2C3D4E5"
                 maxLength={40}
               />
             </label>

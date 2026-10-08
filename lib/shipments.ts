@@ -2,11 +2,11 @@ import { randomBytes } from "node:crypto";
 import type { ShipmentStatus } from "@prisma/client";
 
 /**
- * Generates an ergonomic 14-character tracking code (e.g. XPS-9F2B8D1C4E)
+ * Generates an ergonomic 14-character tracking code (e.g. GDE-9F2B8D1C4E)
  * Optimally sized for standard 1D Code 128 thermal barcodes and optical laser scanners.
  */
 export function generateTrackingCode(): string {
-  return `XPS-${randomBytes(5).toString("hex").toUpperCase()}`;
+  return `GDE-${randomBytes(5).toString("hex").toUpperCase()}`;
 }
 
 export const ALLOWED_TRANSITIONS: Record<ShipmentStatus, ShipmentStatus[]> = {

@@ -12,9 +12,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "XPS Worldwide Express | Cargo & Logistics",
+  title: "Go Delivery Express | Cargo & Logistics",
   description:
-    "Worldwide cargo, courier, freight, and fulfillment services from XPS Worldwide Express.",
+    "Worldwide cargo, courier, freight, and fulfillment services from Go Delivery Express.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -12,7 +12,7 @@ export function AdminSettingsForm() {
   const [serviceTiers, setServiceTiers] = useState("");
   const [cutoffTime, setCutoffTime] = useState("17:00");
   const [supportPhone, setSupportPhone] = useState("+92 300 1234567");
-  const [supportEmail, setSupportEmail] = useState("support@xpsworldwideexpress.com");
+  const [supportEmail, setSupportEmail] = useState("support@godeliveryexpress.com");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
@@ -109,7 +109,7 @@ export function AdminSettingsForm() {
       <div className="rounded-2xl border border-[#e5e6e9] bg-white p-6 shadow-xs">
         <h3 className="m-0 text-[16px] font-semibold text-[#163e6a]">Logistics Network & Routing</h3>
         <p className="mb-5 mt-1 text-[13px] text-[#686970]">
-          Configure cities serviced by XPS courier network and service speed tiers.
+          Configure cities serviced by Go Delivery courier network and service speed tiers.
         </p>
 
         <div className="grid gap-4.5">

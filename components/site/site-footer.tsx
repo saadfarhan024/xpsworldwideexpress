@@ -32,7 +32,7 @@ export function SiteFooter() {
       <div className={`${pageWrap} grid grid-cols-[1.55fr_.72fr_.82fr_1.12fr] gap-11.25 max-[1100px]:gap-7 max-[760px]:grid-cols-2 max-[760px]:gap-x-6.25 max-[760px]:gap-y-9.5`}>
         <div>
           <div className="mb-5.75"><Brand /></div>
-          <p className="text-[14px] leading-[1.8] text-[#505156]">XPS Worldwide Express aiming to disrupt the logistics &amp; courier industry of Pakistan. We are on a mission to provide the best services.</p>
+          <p className="text-[14px] leading-[1.8] text-[#505156]">Go Delivery Express aiming to disrupt the logistics &amp; courier industry of Pakistan. We are on a mission to provide the best services.</p>
         </div>
         <FooterLinks title="Quick Links" links={quickLinks} />
         <FooterLinks title="Important Links" links={importantLinks} />
@@ -41,14 +41,14 @@ export function SiteFooter() {
           <p className="mb-4.5 flex items-start gap-2.5 text-[14px] leading-[1.8] text-[#505156]"><MapPin className="mt-0.75 size-4.25 shrink-0 text-[#163e6a]" /> Shop-40 Liaqat Market Near New Memon Masjid Bolton Market M.A Jinnah Road Karachi, Pakistan</p>
           <h3 className="mb-3.25 mt-5 text-[19px] font-semibold text-[#111] max-[760px]:text-[17px]">Chat with us</h3>
           <div className="flex gap-2.75">
-            <a className="text-[#163e6a] transition-colors hover:opacity-80" href="https://www.facebook.com/XPSWorldwideExpress" target="_blank" rel="noreferrer" aria-label="Chat with XPS on Facebook"><FaFacebook className="size-8.5" /></a>
-            <a className="text-[#e1306c] transition-colors hover:opacity-80" href="https://www.instagram.com/xpsworldwideexpress/" target="_blank" rel="noreferrer" aria-label="Chat with XPS on Instagram"><FaInstagram className="size-8.5" /></a>
-            <a className="text-[#25d366] transition-colors hover:opacity-80" href="https://wa.me/923363587468" target="_blank" rel="noreferrer" aria-label="Chat with XPS on WhatsApp"><FaWhatsapp className="size-8.5" /></a>
+            <a className="text-[#163e6a] transition-colors hover:opacity-80" href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Chat on Facebook"><FaFacebook className="size-8.5" /></a>
+            <a className="text-[#e1306c] transition-colors hover:opacity-80" href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Chat on Instagram"><FaInstagram className="size-8.5" /></a>
+            <a className="text-[#25d366] transition-colors hover:opacity-80" href="https://wa.me/923363587468" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp"><FaWhatsapp className="size-8.5" /></a>
           </div>
         </div>
       </div>
       <div className="mx-6 mt-13.5 flex flex-wrap items-center justify-center gap-2.5 text-center text-[12px] text-[#35363a] max-[760px]:mt-10.5 max-[760px]:gap-1.75 max-[760px]:text-[11px]">
-        © Copyright {new Date().getFullYear()}, XPS Worldwide Express <span className="size-0.75 rounded-full bg-[#8c8d91]" /> All rights reserved <span className="size-0.75 rounded-full bg-[#8c8d91]" /> Designed by <b className="font-semibold text-[#163e6a]">IT Vision (Pvt.) LTD.</b>
+        © Copyright {new Date().getFullYear()}, Go Delivery Express <span className="size-0.75 rounded-full bg-[#8c8d91]" /> All rights reserved <span className="size-0.75 rounded-full bg-[#8c8d91]" /> Designed by <b className="font-semibold text-[#163e6a]">IT Vision (Pvt.) LTD.</b>
       </div>
     </footer>
   );

@@ -3,7 +3,7 @@ import { AdminMerchantBank } from "@/components/site/admin-merchant-bank";
 import { requireAdminPortal } from "@/lib/auth/session";
 
 export const metadata: Metadata = {
-  title: "Merchants | XPS Admin",
+  title: "Merchants | Go Delivery Admin",
   description: "Review merchant accounts and manage bank details.",
 };
 

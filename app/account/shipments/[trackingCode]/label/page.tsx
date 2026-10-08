@@ -55,10 +55,10 @@ export default async function ShipmentLabelPage({ params }: Props) {
           <div className="flex items-center justify-between border-b-2 border-black pb-3">
             <div>
               <span className="font-extrabold tracking-tight text-[22px] text-[#163e6a]">
-                XPS <span className="text-[#ec8123]">EXPRESS</span>
+                GO <span className="text-[#ec8123]">DELIVERY EXPRESS</span>
               </span>
               <p className="m-0 text-[10px] font-semibold tracking-widest uppercase text-black">
-                Worldwide Express & Logistics
+                Express Logistics & Courier Service
               </p>
             </div>
             <div className="text-right">
@@ -161,7 +161,7 @@ export default async function ShipmentLabelPage({ params }: Props) {
               {shipment.trackingCode}
             </p>
             <p className="m-0 mt-1 text-[9px] text-gray-500">
-              Track parcel anytime at www.xpsworldwideexpress.com/tracking
+              Track parcel anytime at www.godeliveryexpress.com/tracking
             </p>
           </div>
         </div>

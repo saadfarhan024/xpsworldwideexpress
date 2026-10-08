@@ -221,7 +221,7 @@ export function AdminTicketDetail({
                     </span>
                   ) : (
                     <span className="flex items-center gap-1 font-semibold text-emerald-800">
-                      <Headphones className="size-3.5" /> XPS Support Staff Reply
+                      <Headphones className="size-3.5" /> Go Delivery Support Staff Reply
                     </span>
                   )}
                 </div>

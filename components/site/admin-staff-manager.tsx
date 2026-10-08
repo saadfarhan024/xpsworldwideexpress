@@ -163,7 +163,7 @@ export function AdminStaffManager() {
                 className={inputClass}
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="staff@xpsworldwideexpress.com"
+                placeholder="staff@godeliveryexpress.com"
               />
             </label>
 

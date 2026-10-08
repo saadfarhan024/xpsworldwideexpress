@@ -4,8 +4,8 @@ import { SiteHeader } from "@/components/site/site-header";
 import { TrackingForm } from "@/components/site/tracking-form";
 
 export const metadata: Metadata = {
-  title: "Package Tracking | XPS Worldwide Express",
-  description: "Track your XPS Worldwide Express shipment.",
+  title: "Package Tracking | Go Delivery Express",
+  description: "Track your Go Delivery Express shipment.",
 };
 
 export default function TrackingPage() {
@@ -20,7 +20,7 @@ export default function TrackingPage() {
         }}
       >
         <div>
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">XPS Worldwide Express</p>
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Go Delivery Express</p>
           <h1 className="m-0 text-[clamp(38px,5vw,60px)] font-medium leading-tight">Package Tracking</h1>
         </div>
       </section>

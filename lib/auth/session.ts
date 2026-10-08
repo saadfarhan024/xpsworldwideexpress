@@ -4,7 +4,7 @@ import type { UserRole } from "@prisma/client";
 import { createToken, hashToken } from "@/lib/auth/tokens";
 import { prisma } from "@/lib/db";
 
-const SESSION_COOKIE = "xps_session";
+const SESSION_COOKIE = "gde_session";
 const SESSION_MAX_AGE = 60 * 60 * 24 * 14;
 
 export async function createSession(userId: string) {

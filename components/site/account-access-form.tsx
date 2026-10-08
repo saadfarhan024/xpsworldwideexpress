@@ -23,7 +23,7 @@ const copy = {
     endpoint: "/api/auth/login",
   },
   "forgot-password": {
-    panelTitle: "Get back to business with XPS.",
+    panelTitle: "Get back to business with Go Delivery.",
     panelBody: "Enter the email address linked to your account and we’ll help you reset your password.",
     eyebrow: "Account recovery",
     heading: "Forgot password?",
@@ -95,7 +95,7 @@ export function AccountAccessForm({ mode }: AccountAccessFormProps) {
           >
             <div className="pointer-events-none absolute -left-15 -top-20 -z-10 size-60 rounded-full border border-white/15 shadow-[0_0_0_35px_rgb(255_255_255/5%),0_0_0_70px_rgb(255_255_255/4%)]" />
             <div className="relative z-1">
-              <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/65">XPS Worldwide Express</p>
+              <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/65">Go Delivery Express</p>
               <h2 className="m-0 max-w-100 text-[clamp(29px,3.5vw,44px)] font-medium leading-[1.13]">{content.panelTitle}</h2>
             </div>
             <p className="relative z-1 mb-0 mt-8 max-w-100 text-[14px] leading-[1.8] text-white/80">{content.panelBody}</p>
@@ -174,7 +174,7 @@ export function AccountAccessForm({ mode }: AccountAccessFormProps) {
               <div className="mt-6 border-t border-[#eeeeef] pt-5 text-[13px] text-[#77787e]">
                 {isLogin ? (
                   <p className="m-0">
-                    New to XPS? <Link className="font-semibold text-[#ec8123] hover:underline" href="/register">Create a business account</Link>
+                    New to Go Delivery? <Link className="font-semibold text-[#ec8123] hover:underline" href="/register">Create a business account</Link>
                     <span className="mx-2 text-[#c7c7cb]">·</span>
                     <Link className="font-medium text-[#55565c] hover:text-[#ec8123]" href="/resend-verification">Resend verification</Link>
                   </p>

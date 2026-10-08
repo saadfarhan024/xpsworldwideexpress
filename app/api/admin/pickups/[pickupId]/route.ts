@@ -109,7 +109,7 @@ export async function PATCH(request: Request, context: RouteContext) {
             data: {
               shipmentId: s.id,
               status: "PICKED_UP",
-              publicNote: "Shipment collected by XPS courier.",
+              publicNote: "Shipment collected by GDE courier.",
               internalNote: note ?? "Pickup marked complete.",
               actorId: actor.id,
             },

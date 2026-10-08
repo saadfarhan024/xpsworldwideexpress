@@ -43,7 +43,7 @@ export async function POST(request: Request) {
         action: "SHOPIFY_APP_UNINSTALLED",
         entityType: "ShopifyIntegration",
         entityId: shopDomain || "unknown",
-        summary: `Shopify store ${shopDomain} uninstalled XPS integration.`,
+        summary: `Shopify store ${shopDomain} uninstalled GDE integration.`,
       },
     });
     return NextResponse.json({ message: "Uninstall acknowledged." }, { status: 200 });
@@ -147,7 +147,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({
-      message: "Shopify order synced to XPS shipment.",
+      message: "Shopify order synced to GDE shipment.",
       trackingCode: shipment.trackingCode,
     });
   }

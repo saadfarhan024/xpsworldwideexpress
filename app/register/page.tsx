@@ -4,9 +4,9 @@ import { SiteHeader } from "@/components/site/site-header";
 import { RegisterForm } from "@/components/site/register-form";
 
 export const metadata: Metadata = {
-  title: "Register | XPS Worldwide Express",
+  title: "Register | Go Delivery Express",
   description:
-    "Register your business with XPS Worldwide Express for courier and fulfillment services.",
+    "Register your business with Go Delivery Express for courier and fulfillment services.",
 };
 
 export default function RegisterPage() {
@@ -21,7 +21,7 @@ export default function RegisterPage() {
         }}
       >
         <div>
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">XPS Worldwide Express</p>
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Go Delivery Express</p>
           <h1 className="m-0 text-[clamp(38px,5vw,60px)] font-medium leading-tight">Business Registration</h1>
         </div>
       </section>

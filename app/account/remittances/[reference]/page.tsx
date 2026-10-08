@@ -59,10 +59,10 @@ export default async function RemittanceStatementPage({ params }: Props) {
         <div className="flex flex-wrap items-start justify-between gap-6 border-b-2 border-[#163e6a] pb-6">
           <div>
             <span className="text-[24px] font-black tracking-tight text-[#163e6a]">
-              XPS <span className="text-[#ec8123]">WORLDWIDE</span>
+              GO <span className="text-[#ec8123]">DELIVERY EXPRESS</span>
             </span>
             <p className="m-0 text-[11px] font-bold tracking-widest uppercase text-[#45464b]">
-              Express & Logistics Settlements
+              Logistics & Courier Settlements
             </p>
           </div>
           <div className="text-right">

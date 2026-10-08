@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db";
 import { isValidTransition, TERMINAL_STATUSES } from "@/lib/shipments";
 import type { ShipmentStatus } from "@prisma/client";
 
-// Status mapping from external carrier events to XPS shipment statuses
+// Status mapping from external carrier events to GDE shipment statuses
 const CARRIER_STATUS_MAP: Record<string, ShipmentStatus> = {
   MANIFEST_RECEIVED: "CREATED",
   PICKED_UP: "PICKED_UP",
@@ -63,8 +63,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Tracking code and carrier status are required." }, { status: 400 });
   }
 
-  const xpsStatus = CARRIER_STATUS_MAP[carrierStatus];
-  if (!xpsStatus) {
+  const gdeStatus = CARRIER_STATUS_MAP[carrierStatus];
+  if (!gdeStatus) {
     return NextResponse.json({ message: `Unrecognized carrier status: ${carrierStatus}` }, { status: 400 });
   }
 
@@ -87,7 +87,7 @@ export async function POST(request: Request) {
   // Idempotency check: if an event with same status and time exists, skip duplication safely
   const isDuplicate = shipment.events.some(
     (e) =>
-      e.status === xpsStatus &&
+      e.status === gdeStatus &&
       Math.abs(e.occurredAt.getTime() - eventTime.getTime()) < 1000
   );
 
@@ -95,12 +95,12 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: "Event already recorded. Replay ignored idempotently.",
       trackingCode,
-      status: xpsStatus,
+      status: gdeStatus,
     });
   }
 
   // Validate allowed status transition
-  if (!isValidTransition(shipment.status, xpsStatus) && shipment.status !== xpsStatus) {
+  if (!isValidTransition(shipment.status, gdeStatus) && shipment.status !== gdeStatus) {
     if (TERMINAL_STATUSES.has(shipment.status)) {
       return NextResponse.json({
         message: `Shipment is already in terminal status ${shipment.status}. Inbound update discarded.`,
@@ -112,12 +112,12 @@ export async function POST(request: Request) {
 
   await prisma.$transaction(async (tx) => {
     // Only update shipment status if it's a forward valid progression
-    if (isValidTransition(shipment.status, xpsStatus)) {
+    if (isValidTransition(shipment.status, gdeStatus)) {
       await tx.shipment.update({
         where: { id: shipment.id },
         data: {
-          status: xpsStatus,
-          ...(xpsStatus === "DELIVERED" && shipment.codAmount && !shipment.collectedAmount
+          status: gdeStatus,
+          ...(gdeStatus === "DELIVERED" && shipment.codAmount && !shipment.collectedAmount
             ? { collectedAmount: shipment.codAmount }
             : {}),
         },
@@ -127,7 +127,7 @@ export async function POST(request: Request) {
     await tx.trackingEvent.create({
       data: {
         shipmentId: shipment.id,
-        status: xpsStatus,
+        status: gdeStatus,
         location: location || null,
         publicNote,
         internalNote: eventId ? `Inbound Carrier Webhook EventID: ${eventId}` : null,
@@ -140,7 +140,7 @@ export async function POST(request: Request) {
         action: "CARRIER_WEBHOOK_EVENT_PROCESSED",
         entityType: "Shipment",
         entityId: shipment.id,
-        summary: `Carrier webhook updated shipment ${trackingCode} to ${xpsStatus}${eventId ? ` (Event ${eventId})` : ""}.`,
+        summary: `Carrier webhook updated shipment ${trackingCode} to ${gdeStatus}${eventId ? ` (Event ${eventId})` : ""}.`,
       },
     });
   });
@@ -148,6 +148,6 @@ export async function POST(request: Request) {
   return NextResponse.json({
     message: "Carrier event processed successfully.",
     trackingCode,
-    status: xpsStatus,
+    status: gdeStatus,
   });
 }

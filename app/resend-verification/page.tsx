@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 
 export const metadata: Metadata = {
-  title: "Resend Verification | XPS Worldwide Express",
-  description: "Request a new email verification link for your XPS Worldwide Express account.",
+  title: "Resend Verification | Go Delivery Express",
+  description: "Request a new email verification link for your Go Delivery Express account.",
 };
 
 export default function ResendVerificationPage() {
@@ -20,7 +20,7 @@ export default function ResendVerificationPage() {
         }}
       >
         <div>
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">XPS Worldwide Express</p>
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Go Delivery Express</p>
           <h1 className="m-0 text-[clamp(38px,5vw,60px)] font-medium leading-tight">Resend Verification</h1>
         </div>
       </section>

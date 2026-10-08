@@ -6,9 +6,9 @@ import { SiteHeader } from "@/components/site/site-header";
 import { pageWrap, orangeEyebrow, sectionTitle, buttonPrimary } from "@/components/site/styles";
 
 export const metadata: Metadata = {
-  title: "About Us | XPS Worldwide Express",
+  title: "About Us | Go Delivery Express",
   description:
-    "Meet XPS Worldwide Express and learn how our people and delivery network move shipments across Pakistan and around the world.",
+    "Meet Go Delivery Express and learn how our people and delivery network move shipments across Pakistan and around the world.",
 };
 
 const promises = [
@@ -48,7 +48,7 @@ export default function AboutUsPage() {
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_12%_2%,rgba(255,255,255,0.15),transparent_32%),radial-gradient(ellipse_at_92%_0%,rgba(255,255,255,0.13),transparent_34%),linear-gradient(120deg,#302d2d,#080809_68%)]" />
         <div className="pointer-events-none absolute -left-20 top-6 -z-10 size-64 rounded-full bg-white/5 blur-2xl" />
         <div className="pointer-events-none absolute -right-16 top-0 -z-10 size-72 rounded-full bg-white/5 blur-2xl" />
-        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/65">XPS Worldwide Express</p>
+        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/65">Go Delivery Express</p>
         <h1 className="m-0 text-[clamp(42px,5vw,66px)] font-medium leading-tight">About Us</h1>
       </section>
 
@@ -57,7 +57,7 @@ export default function AboutUsPage() {
           <p className={orangeEyebrow}>Moving what matters</p>
           <h2 className={sectionTitle}>We are beyond delivery</h2>
           <p className="mb-4 mt-5 text-[15px] leading-[1.9] text-[#595a60]">
-            XPS Worldwide Express brings people and businesses closer to the places they need to reach. Our team helps make shipping straightforward, with attentive support at every step.
+            Go Delivery Express brings people and businesses closer to the places they need to reach. Our team helps make shipping straightforward, with attentive support at every step.
           </p>
           <p className="m-0 text-[15px] leading-[1.9] text-[#595a60]">
             Our delivery network connects hubs, couriers, cargo loaders, vans, trains, and air services to move shipments across a wide range of destinations.

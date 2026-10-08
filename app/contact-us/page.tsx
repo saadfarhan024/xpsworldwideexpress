@@ -5,9 +5,9 @@ import { SiteHeader } from "@/components/site/site-header";
 import { pageWrap } from "@/components/site/styles";
 
 export const metadata: Metadata = {
-  title: "Contact Us | XPS Worldwide Express",
+  title: "Contact Us | Go Delivery Express",
   description:
-    "Get in touch with XPS Worldwide Express for courier, shipping, and delivery support.",
+    "Get in touch with Go Delivery Express for courier, shipping, and delivery support.",
 };
 
 const fieldClass =
@@ -32,7 +32,7 @@ export default function ContactUsPage() {
         <div className={`${pageWrap} grid grid-cols-[1.05fr_.95fr] items-center gap-[clamp(36px,5vw,72px)] max-[900px]:grid-cols-1 max-[900px]:gap-10`}>
           <div>
             <p className="mb-6 text-[clamp(23px,2.4vw,30px)] font-semibold text-[#ec8123]">Get in touch with us</p>
-            <form action="mailto:info@xpsworldwideexpress.pk" method="post" encType="text/plain" className="grid grid-cols-2 gap-4 max-[520px]:grid-cols-1">
+            <form action="mailto:info@godeliveryexpress.pk" method="post" encType="text/plain" className="grid grid-cols-2 gap-4 max-[520px]:grid-cols-1">
               <label className="sr-only" htmlFor="first-name">First name</label>
               <input className={fieldClass} id="first-name" name="First name" placeholder="First Name" autoComplete="given-name" required />
               <label className="sr-only" htmlFor="last-name">Last name</label>

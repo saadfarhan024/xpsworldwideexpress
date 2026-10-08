@@ -33,8 +33,8 @@ export async function POST(request: Request) {
     const message = user.status === "PENDING_EMAIL_VERIFICATION"
       ? "Verify your email before signing in. You can request a new verification link if needed."
       : user.status === "PENDING_APPROVAL"
-        ? "Your email is verified and your account is awaiting XPS approval."
-        : "This account cannot sign in. Please contact XPS support for assistance.";
+        ? "Your email is verified and your account is awaiting GDE approval."
+        : "This account cannot sign in. Please contact GDE support for assistance.";
     return NextResponse.json({
       message,
       ...(user.status === "PENDING_EMAIL_VERIFICATION" ? { resendVerification: true } : {}),

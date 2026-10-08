@@ -16,7 +16,7 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   service_tiers: JSON.stringify(["Domestic Overnight", "Same-Day Express", "Economy Ground"]),
   daily_cutoff_time: "17:00",
   support_phone: "+92 300 1234567",
-  support_email: "support@xpsworldwideexpress.com",
+  support_email: "support@godeliveryexpress.com",
 };
 
 export async function GET() {

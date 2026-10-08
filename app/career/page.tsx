@@ -6,9 +6,9 @@ import { ScrollReveal } from "@/components/site/scroll-reveal";
 import { pageWrap, sectionTitle } from "@/components/site/styles";
 
 export const metadata: Metadata = {
-  title: "Careers | XPS Worldwide Express",
+  title: "Careers | Go Delivery Express",
   description:
-    "Explore career opportunities and employee benefits at XPS Worldwide Express.",
+    "Explore career opportunities and employee benefits at Go Delivery Express.",
 };
 
 const benefits = [
@@ -34,7 +34,7 @@ export default function CareerPage() {
       >
         <div className="relative z-10 px-5 pt-24 text-center max-[760px]:pt-20">
           <h1 className="m-0 text-[clamp(42px,5vw,72px)] font-normal leading-tight text-white">
-            Careers at XPS
+            Careers at Go Delivery
           </h1>
         </div>
       </section>
@@ -47,7 +47,7 @@ export default function CareerPage() {
           <div className="max-w-137.5">
             <h2 className={sectionTitle}>Our Career</h2>
             <p className="my-6.25 mb-7.75 text-[16px] leading-[1.9] text-[#515257]">
-              Our team works together to solve logistics and courier challenges and improve the services we offer. We welcome recent graduates and experienced professionals interested in internships, management trainee programs, and other roles at XPS.
+              Our team works together to solve logistics and courier challenges and improve the services we offer. We welcome recent graduates and experienced professionals interested in internships, management trainee programs, and other roles at Go Delivery.
             </p>
           </div>
           <div
@@ -75,7 +75,7 @@ export default function CareerPage() {
               <div className="max-w-105">
                 <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/80">Job Offers</p>
                 <h2 className="mb-4 text-[clamp(30px,3.4vw,46px)] font-semibold leading-[1.12] text-white">
-                  Find your place at XPS
+                  Find your place at Go Delivery
                 </h2>
                 <p className="m-0 max-w-95 text-base leading-7 text-white/90">
                   Have questions about the opportunities and benefits we offer our employees? We’d be happy to help.
@@ -84,7 +84,7 @@ export default function CareerPage() {
             </div>
 
             <div className="max-w-137.5">
-              <h2 className="m-0 text-[clamp(28px,3vw,38px)] font-medium text-[#202126]">Benefits at XPS</h2>
+              <h2 className="m-0 text-[clamp(28px,3vw,38px)] font-medium text-[#202126]">Benefits at Go Delivery</h2>
               <ul className="my-6 grid list-none gap-4.5 p-0 text-[16px] leading-[1.8] text-[#515257]">
                 {benefits.map((benefit) => (
                   <li className="flex items-start gap-3.5" key={benefit}>

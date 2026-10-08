@@ -6,9 +6,9 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 
 export const metadata: Metadata = {
-  title: "Our Services | XPS Worldwide Express",
+  title: "Our Services | Go Delivery Express",
   description:
-    "Ocean, train, air, road, logistics, and packaging services from XPS Worldwide Express.",
+    "Ocean, train, air, road, logistics, and packaging services from Go Delivery Express.",
 };
 
 const services = [
@@ -34,7 +34,7 @@ const services = [
     alt: "Air freight aircraft ready for departure",
   },
   {
-    title: "XPS Logistics",
+    title: "Go Delivery Logistics",
     description:
       "Forwarding that moves goods safely, economically, and efficiently to your customers.",
     image: "https://xpsworldwideexpress.pk/img/img-cap4-300x300-1.jpg",
@@ -135,7 +135,7 @@ export default function ServicesPage() {
                 Years of Experience
               </h2>
               <p className="mb-0 max-w-[60ch] text-[16px] leading-[1.8] text-neutral-600">
-                XPS Worldwide Express is an international freight forwarder, providing first-class import and export services by sea, air, and road for businesses and personal shipments.
+                Go Delivery Express is an international freight forwarder, providing first-class import and export services by sea, air, and road for businesses and personal shipments.
               </p>
             </div>
             <div className="divide-y divide-neutral-300 border-y border-neutral-300">

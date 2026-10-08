@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 
 export const metadata: Metadata = {
-  title: "Log In | XPS Worldwide Express",
-  description: "Log in to your XPS Worldwide Express business account.",
+  title: "Log In | Go Delivery Express",
+  description: "Log in to your Go Delivery Express business account.",
 };
 
 export default function LoginPage() {
@@ -20,7 +20,7 @@ export default function LoginPage() {
         }}
       >
         <div>
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">XPS Worldwide Express</p>
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Go Delivery Express</p>
           <h1 className="m-0 text-[clamp(38px,5vw,60px)] font-medium leading-tight">Login</h1>
         </div>
       </section>

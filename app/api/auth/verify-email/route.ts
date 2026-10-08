@@ -54,5 +54,5 @@ export async function POST(request: Request) {
   });
 
   if (!verified) return NextResponse.json({ message: "This verification link has expired or was already used." }, { status: 400 });
-  return NextResponse.json({ message: "Email verified. Your application is now awaiting XPS review." });
+  return NextResponse.json({ message: "Email verified. Your application is now awaiting GDE review." });
 }

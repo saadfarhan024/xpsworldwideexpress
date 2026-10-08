@@ -117,7 +117,7 @@ export default async function MerchantRemittancesPage() {
             <WalletCards className="mx-auto size-10 text-[#a0a1a8]" />
             <h2 className="mt-4 text-[19px] font-semibold text-[#202126]">No remittances yet</h2>
             <p className="mx-auto mb-0 mt-1 max-w-100 text-[13px] text-[#6d6e74]">
-              Once your delivered COD shipments are reconciled by XPS Finance, your remittance statements and payout references will appear here.
+              Once your delivered COD shipments are reconciled by Go Delivery Finance, your remittance statements and payout references will appear here.
             </p>
           </div>
         )}

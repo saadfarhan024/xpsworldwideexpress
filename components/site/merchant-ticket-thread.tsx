@@ -93,7 +93,7 @@ export function MerchantTicketThread({
                   }`}
                 >
                   <span className="font-semibold">
-                    {isMe ? "You (Merchant)" : "XPS Support Agent"}
+                    {isMe ? "You (Merchant)" : "Go Delivery Support Agent"}
                   </span>
                   <span>{new Date(m.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
                 </div>

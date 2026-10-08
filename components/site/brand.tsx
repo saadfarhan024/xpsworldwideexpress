@@ -6,11 +6,11 @@ export function Brand({ priority = false }: { priority?: boolean }) {
     <Link
       className="inline-flex w-33 shrink-0 rounded-lg bg-white p-2 max-[900px]:w-26.25 max-[900px]:p-1.5"
       href="/"
-      aria-label="XPS Worldwide Express home"
+      aria-label="Go Delivery Express home"
     >
       <Image
         src="/logo.png"
-        alt="XPS Worldwide Express"
+        alt="Go Delivery Express"
         width={350}
         height={218}
         priority={priority}

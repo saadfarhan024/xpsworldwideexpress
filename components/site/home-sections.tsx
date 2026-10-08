@@ -64,10 +64,10 @@ export function AboutSection() {
         style={{ backgroundImage: "url(https://xpsworldwideexpress.pk/img/2963.jpg)" }}
       />
       <div className="max-w-137.5">
-        <p className={orangeEyebrow}>XPS worldwide express</p>
+        <p className={orangeEyebrow}>Go Delivery Express</p>
         <h2 className={sectionTitle}>We Have Smart Solutions For You</h2>
         <p className="my-6.25 mb-7.75 text-[16px] leading-[1.9] text-[#515257]">
-          With XPS Worldwide Express, you’ve got a range of options for your important export and import heavy shipments. We make it quick and easy to find out exactly how to get your shipment ready, tracked and monitored.
+          With Go Delivery Express, you’ve got a range of options for your important export and import heavy shipments. We make it quick and easy to find out exactly how to get your shipment ready, tracked and monitored.
         </p>
         <Button nativeButton={false} render={<a href="/about-us" />} className={buttonPrimary}>
           About Us <ArrowRight aria-hidden="true" />
@@ -102,8 +102,8 @@ export function WhySection() {
     <section className="bg-[#f2f3f5] py-26.25 max-[760px]:py-19" id="why-us">
       <div className={`${pageWrap} grid grid-cols-[.8fr_1.2fr] items-center gap-20 max-[1100px]:gap-10.5 max-[760px]:grid-cols-1 max-[760px]:gap-8.75`}>
         <div>
-          <p className={orangeEyebrow}>The XPS difference</p>
-          <h2 className="m-0 max-w-110 text-[clamp(35px,4vw,49px)] font-normal leading-[1.12] text-[#111]">Why XPS Worldwide Express?</h2>
+          <p className={orangeEyebrow}>The Go Delivery difference</p>
+          <h2 className="m-0 max-w-110 text-[clamp(35px,4vw,49px)] font-normal leading-[1.12] text-[#111]">Why Go Delivery Express?</h2>
           <ul className="mt-8 grid list-none gap-4.5 p-0">
             {reasons.map((reason) => (
               <li className="flex items-center gap-3 text-[16px] text-[#606166]" key={reason}>
@@ -129,7 +129,7 @@ export function ContactSection() {
           <p className={eyebrow}>Your delivery, in good hands</p>
           <h2 className="m-0 max-w-152.5 text-[clamp(34px,4.5vw,58px)] font-normal leading-[1.1] uppercase max-[760px]:text-[38px]">Reach Your Destination 100% Sure And Safe</h2>
           <p className="my-5.25 mb-7.25 text-[16px] text-white/80">We will take care of your delivery and deliver it safe and on time.</p>
-          <Button nativeButton={false} render={<a href="mailto:info@xpsworldwideexpress.pk" />} className={`${buttonBase} bg-white text-[#ec8123] hover:bg-[#f3f3f3]`}>
+          <Button nativeButton={false} render={<a href="mailto:info@godeliveryexpress.pk" />} className={`${buttonBase} bg-white text-[#ec8123] hover:bg-[#f3f3f3]`}>
             Contact Us <ArrowRight aria-hidden="true" />
           </Button>
         </div>
