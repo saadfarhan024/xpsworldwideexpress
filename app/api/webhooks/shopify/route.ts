@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { prisma } from "@/lib/db";
 import { generateTrackingCode } from "@/lib/shipments";
+import { normalizeShopDomain } from "@/lib/shopify";
 
 function verifyShopifyHmac(body: string, hmac: string | null, secret: string): boolean {
   if (!hmac || !secret) return false;
@@ -16,13 +17,16 @@ function verifyShopifyHmac(body: string, hmac: string | null, secret: string): b
 }
 
 export async function POST(request: Request) {
-  const secret = process.env.SHOPIFY_API_SECRET || "development-shopify-secret-key-123";
+  const secret = process.env.SHOPIFY_API_SECRET || (process.env.NODE_ENV === "production" ? "" : "development-shopify-secret-key-123");
   const hmac = request.headers.get("x-shopify-hmac-sha256");
   const topic = request.headers.get("x-shopify-topic");
-  const shopDomain = request.headers.get("x-shopify-shop-domain");
+  const shopDomain = normalizeShopDomain(request.headers.get("x-shopify-shop-domain") || "");
 
   const rawBody = await request.text();
 
+  if (process.env.NODE_ENV === "production" && !secret) {
+    return NextResponse.json({ message: "Shopify webhook secret is not configured." }, { status: 503 });
+  }
   if (process.env.NODE_ENV === "production" && !verifyShopifyHmac(rawBody, hmac, secret)) {
     return NextResponse.json({ message: "Invalid Shopify HMAC signature." }, { status: 401 });
   }
@@ -37,6 +41,11 @@ export async function POST(request: Request) {
   }
 
   if (topic === "app/uninstalled") {
+    if (!shopDomain) return NextResponse.json({ message: "Missing or invalid x-shopify-shop-domain header." }, { status: 400 });
+    await prisma.shopifyIntegration.updateMany({
+      where: { shopDomain },
+      data: { uninstalledAt: new Date() },
+    });
     // Record uninstall event in audit log
     await prisma.auditLog.create({
       data: {
@@ -82,13 +91,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Missing x-shopify-shop-domain header." }, { status: 400 });
     }
 
-    // Match merchant whose website matches the shop domain
-    const merchant = await prisma.merchantProfile.findFirst({
-      where: {
-        user: { status: "ACTIVE" },
-        website: { contains: shopDomain, mode: "insensitive" },
-      },
+    if (!shopDomain) return NextResponse.json({ message: "Missing or invalid x-shopify-shop-domain header." }, { status: 400 });
+
+    const integration = await prisma.shopifyIntegration.findFirst({
+      where: { shopDomain, uninstalledAt: null, merchant: { user: { status: "ACTIVE" } } },
+      include: { merchant: true },
     });
+    const merchant = integration?.merchant;
 
     if (!merchant) {
       return NextResponse.json(

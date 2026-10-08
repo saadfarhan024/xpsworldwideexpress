@@ -108,9 +108,38 @@ model MerchantProfile {
   pickupRequests     PickupRequest[]
   supportTickets     SupportTicket[]
   remittances        Remittance[]
+  shopifyIntegration  ShopifyIntegration?
+  shopifyOAuthStates  ShopifyOAuthState[]
 
   @@index([companyName])
   @@index([city])
+}
+
+model ShopifyIntegration {
+  id                 String   @id @default(cuid())
+  merchantId         String   @unique
+  shopDomain         String   @unique
+  accessToken        String   @db.Text
+  scopes             String
+  installedAt        DateTime @default(now())
+  uninstalledAt      DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  merchant           MerchantProfile @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@index([shopDomain, uninstalledAt])
+}
+
+model ShopifyOAuthState {
+  id          String   @id @default(cuid())
+  merchantId  String
+  stateHash   String   @unique
+  shopDomain  String
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  merchant    MerchantProfile @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@index([merchantId, expiresAt])
 }
 
 model MerchantBankDetail {

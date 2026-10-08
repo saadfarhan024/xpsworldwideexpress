@@ -16,6 +16,7 @@ export default async function AccountLayout({ children }: { children: ReactNode 
           <div className="flex items-center gap-4">
             <Link className="hidden text-[12px] font-semibold text-white/80 hover:text-white sm:block" href="/account/shipments">Shipments</Link>
             <Link className="hidden text-[12px] font-semibold text-white/80 hover:text-white sm:block" href="/account/profile">Profile</Link>
+            <Link className="hidden text-[12px] font-semibold text-white/80 hover:text-white sm:block" href="/account/integrations">Integrations</Link>
             <span className="hidden text-right text-[12px] text-white/75 sm:block">{companyName}</span>
             <SignOutButton />
           </div>
