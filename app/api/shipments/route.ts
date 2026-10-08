@@ -1,7 +1,7 @@
-import { randomBytes } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
+import { generateTrackingCode } from "@/lib/shipments";
 
 type ShipmentInput = {
   recipientName?: unknown;
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Check the recipient, delivery details, parcel count, and COD amount." }, { status: 400 });
   }
 
-  const trackingCode = `XPS-${randomBytes(12).toString("hex").toUpperCase()}`;
+  const trackingCode = generateTrackingCode();
   const shipment = await prisma.$transaction(async (transaction) => {
     const created = await transaction.shipment.create({
       data: {

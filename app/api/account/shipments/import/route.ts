@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { randomBytes } from "node:crypto";
 import { getCurrentUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
+import { generateTrackingCode } from "@/lib/shipments";
 
 function parseCsv(text: string): string[][] {
   const lines: string[][] = [];
@@ -152,7 +152,7 @@ export async function POST(request: Request) {
       }
     }
 
-    const trackingCode = `XPS-${randomBytes(12).toString("hex").toUpperCase()}`;
+    const trackingCode = generateTrackingCode();
 
     validShipments.push({
       recipientName,

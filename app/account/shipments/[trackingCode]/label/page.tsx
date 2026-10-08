@@ -3,6 +3,7 @@ import { getCurrentUser, isStaff } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
 import { formatStatusLabel } from "@/lib/shipments";
 import { PrintButton } from "@/components/site/print-button";
+import { Barcode } from "@/components/site/barcode";
 
 type Props = {
   params: Promise<{ trackingCode: string }>;
@@ -152,17 +153,9 @@ export default async function ShipmentLabelPage({ params }: Props) {
 
           {/* Barcode & Tracking Code Section */}
           <div className="pt-4 text-center">
-            {/* Visual representation of 1D barcode lines */}
-            <div
-              className="mx-auto flex h-14 w-full max-w-95 items-stretch justify-center gap-0.75 overflow-hidden py-1"
-              aria-hidden="true"
-            >
-              {Array.from({ length: 48 }).map((_, i) => (
-                <span
-                  key={i}
-                  className={`w-1 bg-black ${i % 3 === 0 ? "w-1.5" : i % 5 === 0 ? "w-0.5" : ""}`}
-                />
-              ))}
+            {/* Real scannable Code 128 laser manifest barcode */}
+            <div className="mx-auto flex justify-center py-2">
+              <Barcode value={shipment.trackingCode} />
             </div>
             <p className="m-0 font-mono text-[18px] font-extrabold tracking-widest text-black">
               {shipment.trackingCode}

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { prisma } from "@/lib/db";
+import { generateTrackingCode } from "@/lib/shipments";
 
 function verifyShopifyHmac(body: string, hmac: string | null, secret: string): boolean {
   if (!hmac || !secret) return false;
@@ -109,7 +110,7 @@ export async function POST(request: Request) {
       ? order.line_items.map((i) => `${i.quantity}x ${i.title}`).join(", ")
       : order.name ?? null;
 
-    const trackingCode = `XPS-${randomBytes(12).toString("hex").toUpperCase()}`;
+    const trackingCode = generateTrackingCode();
 
     const shipment = await prisma.$transaction(async (tx) => {
       const created = await tx.shipment.create({
