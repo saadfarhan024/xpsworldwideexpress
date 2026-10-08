@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
-import { createHmac, randomBytes } from "node:crypto";
+import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { prisma } from "@/lib/db";
 
 function verifyShopifyHmac(body: string, hmac: string | null, secret: string): boolean {
   if (!hmac || !secret) return false;
   const hash = createHmac("sha256", secret).update(body, "utf8").digest("base64");
-  return hash === hmac;
+  try {
+    const a = Buffer.from(hash);
+    const b = Buffer.from(hmac);
+    return a.length === b.length && timingSafeEqual(a, b);
+  } catch {
+    return false;
+  }
 }
 
 export async function POST(request: Request) {
@@ -71,16 +77,23 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Order has no complete shipping address, skipping." });
     }
 
-    // Try to find merchant matching the shop domain or fallback to first active merchant
+    if (!shopDomain) {
+      return NextResponse.json({ message: "Missing x-shopify-shop-domain header." }, { status: 400 });
+    }
+
+    // Match merchant whose website matches the shop domain
     const merchant = await prisma.merchantProfile.findFirst({
       where: {
         user: { status: "ACTIVE" },
-        ...(shopDomain ? { website: { contains: shopDomain } } : {}),
+        website: { contains: shopDomain, mode: "insensitive" },
       },
     });
 
     if (!merchant) {
-      return NextResponse.json({ message: "No active merchant found for this Shopify shop." });
+      return NextResponse.json(
+        { message: `No active merchant registered with store domain "${shopDomain}".` },
+        { status: 404 }
+      );
     }
 
     const recipientName =

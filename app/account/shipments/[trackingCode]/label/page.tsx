@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser, isStaff } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
 import { formatStatusLabel } from "@/lib/shipments";
+import { PrintButton } from "@/components/site/print-button";
 
 type Props = {
   params: Promise<{ trackingCode: string }>;
@@ -44,13 +45,7 @@ export default async function ShipmentLabelPage({ params }: Props) {
               Standard 4&quot; × 6&quot; thermal and laser dispatch manifest format
             </p>
           </div>
-          <button
-            // Native print trigger via inline script or button click
-            onClick={() => {}}
-            className="rounded-lg bg-[#163e6a] px-4 py-2 text-[13px] font-semibold text-white shadow-xs hover:bg-[#ec8123]"
-          >
-            Print Label
-          </button>
+          <PrintButton label="Print Label" />
         </div>
 
         {/* The Printable Label Sheet (4x6 style) */}

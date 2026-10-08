@@ -24,8 +24,27 @@ export async function GET() {
     return NextResponse.json({ message: "No logo uploaded." }, { status: 404 });
   }
 
+  const key = user.merchantProfile.logoStorageKey;
+
+  // 1. Data URL (database-backed for Vercel/serverless)
+  if (key.startsWith("data:")) {
+    const [header, base64Data] = key.split(";base64,");
+    if (!base64Data) {
+      return NextResponse.json({ message: "Logo data is invalid." }, { status: 500 });
+    }
+    const contentType = header.replace("data:", "") || "image/png";
+    const data = Buffer.from(base64Data, "base64");
+    return new NextResponse(data, {
+      headers: {
+        "Content-Type": contentType,
+        "Cache-Control": "private, max-age=86400, stale-while-revalidate=604800",
+      },
+    });
+  }
+
+  // 2. Filesystem fallback (local disk)
   try {
-    const absolutePath = logoAbsolutePath(user.merchantProfile.logoStorageKey);
+    const absolutePath = logoAbsolutePath(key);
     const data = await readFile(absolutePath);
     const extension = path.extname(absolutePath).toLowerCase();
     return new NextResponse(data, {

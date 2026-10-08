@@ -15,6 +15,16 @@ function prune(timestamps: number[], windowMs: number, now: number) {
 
 export function checkRateLimit(key: string, limit: number, windowMs: number): RateLimitResult {
   const now = Date.now();
+
+  // Safeguard against unbounded memory growth
+  if (buckets.size > 5000) {
+    for (const [k, v] of buckets.entries()) {
+      if (v.timestamps.length === 0 || now - (v.timestamps[v.timestamps.length - 1] ?? 0) > 30 * 60 * 1000) {
+        buckets.delete(k);
+      }
+    }
+  }
+
   const entry = buckets.get(key) ?? { timestamps: [] };
   entry.timestamps = prune(entry.timestamps, windowMs, now);
 

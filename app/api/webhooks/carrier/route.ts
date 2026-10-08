@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createHmac } from "node:crypto";
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { prisma } from "@/lib/db";
 import { isValidTransition, TERMINAL_STATUSES } from "@/lib/shipments";
 import type { ShipmentStatus } from "@prisma/client";
@@ -22,7 +22,13 @@ const CARRIER_STATUS_MAP: Record<string, ShipmentStatus> = {
 function verifySignature(payload: string, signature: string | null, secret: string): boolean {
   if (!signature || !secret) return false;
   const expected = createHmac("sha256", secret).update(payload).digest("hex");
-  return expected.toLowerCase() === signature.toLowerCase();
+  try {
+    const a = Buffer.from(expected.toLowerCase());
+    const b = Buffer.from(signature.toLowerCase());
+    return a.length === b.length && timingSafeEqual(a, b);
+  } catch {
+    return false;
+  }
 }
 
 export async function POST(request: Request) {

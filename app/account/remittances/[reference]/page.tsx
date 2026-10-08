@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import { getCurrentUser, isFinanceOrAdmin } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Printer } from "lucide-react";
+import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { PrintButton } from "@/components/site/print-button";
 
 type Props = {
   params: Promise<{ reference: string }>;
@@ -50,12 +51,7 @@ export default async function RemittanceStatementPage({ params }: Props) {
         >
           <ArrowLeft className="size-4" /> Back to remittances
         </Link>
-        <button
-          onClick={() => {}}
-          className="inline-flex items-center gap-2 rounded-lg bg-[#163e6a] px-4 py-2 text-[12px] font-semibold text-white shadow-xs hover:bg-[#ec8123]"
-        >
-          <Printer className="size-3.5" /> Print Statement
-        </button>
+        <PrintButton label="Print Statement" className="inline-flex items-center gap-2 rounded-lg bg-[#163e6a] px-4 py-2 text-[12px] font-semibold text-white shadow-xs hover:bg-[#ec8123]" />
       </div>
 
       <div className="rounded-2xl border border-[#e5e6e9] bg-white p-8 shadow-[0_8px_24px_rgba(24,25,30,0.04)] print:border-0 print:p-0 print:shadow-none">
