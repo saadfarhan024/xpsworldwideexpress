@@ -149,6 +149,7 @@ export function RegisterForm() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<Partial<Record<ValueKey, string>>>({});
   const [notice, setNotice] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const updateValue = (id: ValueKey, value: string) => {
     setValues((current) => ({ ...current, [id]: value }));
@@ -176,7 +177,9 @@ export function RegisterForm() {
       }
     }
     if (step === 3) {
-      if (values.password.length < 8) nextErrors.password = "Use at least 8 characters.";
+      if (values.password.length < 8 || !/[A-Za-z]/.test(values.password) || !/\d/.test(values.password)) {
+        nextErrors.password = "Use at least 8 characters with at least one letter and one number.";
+      }
       if (!values.confirmPassword) nextErrors.confirmPassword = "Confirm your password.";
       else if (values.password !== values.confirmPassword) nextErrors.confirmPassword = "Passwords do not match.";
     }
@@ -199,10 +202,25 @@ export function RegisterForm() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const submitRegistration = (event: FormEvent<HTMLFormElement>) => {
+  const submitRegistration = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validateCurrentStep()) return;
-    setNotice("Your details are complete. Registration submission will be available once the account service is connected.");
+    setIsSubmitting(true);
+    setNotice("");
+
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const result = await response.json() as { message?: string };
+      setNotice(result.message ?? "We could not submit your application. Please try again.");
+    } catch {
+      setNotice("We could not connect to the registration service. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -288,7 +306,7 @@ export function RegisterForm() {
 
           {step === 3 && (
             <div className="mx-auto grid max-w-140 gap-5">
-              <p className="-mt-1 mb-1 text-[13px] leading-6 text-[#6a6b71]">Use at least 8 characters. Your password will help protect your business account.</p>
+              <p className="-mt-1 mb-1 text-[13px] leading-6 text-[#6a6b71]">Use at least 8 characters with at least one letter and one number. Your password will help protect your business account.</p>
               <TextField id="password" label="Password" value={values.password} onChange={updateValue} error={errors.password} type="password" autoComplete="new-password" required />
               <TextField id="confirmPassword" label="Confirm password" value={values.confirmPassword} onChange={updateValue} error={errors.confirmPassword} type="password" autoComplete="new-password" required />
             </div>
@@ -305,8 +323,8 @@ export function RegisterForm() {
                 Continue <ArrowRight className="size-4" aria-hidden="true" />
               </button>
             ) : (
-              <button className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#163e6a] px-5 text-[13px] font-semibold text-white transition hover:bg-[#ec8123]" type="submit">
-                Create account <Check className="size-4" aria-hidden="true" />
+              <button className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#163e6a] px-5 text-[13px] font-semibold text-white transition hover:bg-[#ec8123] disabled:cursor-not-allowed disabled:opacity-65" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting…" : "Create account"} <Check className="size-4" aria-hidden="true" />
               </button>
             )}
           </div>

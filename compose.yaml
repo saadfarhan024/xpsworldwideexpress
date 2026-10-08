@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: docker.io/library/postgres:17-alpine
+    container_name: xps-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-xps_worldwide}
+      POSTGRES_USER: ${POSTGRES_USER:-xps_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env before starting PostgreSQL}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - xps-postgres-data:/var/lib/postgresql/data
+      - ./postgres/init/01-extensions.sql:/docker-entrypoint-initdb.d/01-extensions.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  xps-postgres-data:
