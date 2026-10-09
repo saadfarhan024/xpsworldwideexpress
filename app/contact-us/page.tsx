@@ -21,7 +21,7 @@ export default function ContactUsPage() {
         className="relative grid min-h-100 place-items-center overflow-hidden bg-cover bg-center px-5 pb-8 pt-30 text-center text-white max-[760px]:min-h-56 max-[760px]:pb-5 max-[760px]:pt-22"
         style={{
           backgroundImage:
-            "linear-gradient(90deg,rgba(10,11,14,0.79),rgba(10,11,14,0.67)),url(https://xpsworldwideexpress.pk/img/breadcrumb-contact.jpg)",
+            "linear-gradient(90deg,rgba(10,11,14,0.79),rgba(10,11,14,0.67)),url(/breadcrumb-contact.jpg)",
         }}
       >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_8%_15%,rgba(255,255,255,0.12),transparent_30%),radial-gradient(ellipse_at_92%_5%,rgba(255,255,255,0.1),transparent_32%)]" />
@@ -54,7 +54,7 @@ export default function ContactUsPage() {
             className="relative isolate flex min-h-120 flex-col justify-between overflow-hidden rounded-[8px] bg-cover bg-center p-[clamp(28px,4vw,44px)] text-white shadow-[0_18px_42px_rgba(0,0,0,0.17)] max-[900px]:min-h-100 max-[520px]:min-h-120"
             style={{
               backgroundImage:
-                "linear-gradient(90deg,rgba(16,17,20,0.82),rgba(16,17,20,0.72)),url(https://xpsworldwideexpress.pk/img/post-thumb2-e1599202970322.jpg)",
+                "linear-gradient(90deg,rgba(16,17,20,0.82),rgba(16,17,20,0.72)),url(/post-thumb2-e1599202970322.jpg)",
             }}
           >
             <div>

@@ -7,12 +7,12 @@ const team = [
   {
     name: "Timothy Powell",
     role: "Operations lead",
-    image: "https://xpsworldwideexpress.pk/img/Team-5.png",
+    image: "/Team-5.png",
   },
   {
     name: "Lisa R. Boone",
     role: "Customer experience",
-    image: "https://xpsworldwideexpress.pk/img/Team-8.png",
+    image: "/Team-8.png",
   },
 ];
 

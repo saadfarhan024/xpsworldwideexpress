@@ -67,7 +67,7 @@ export default function AboutUsPage() {
           className="min-h-72 rounded-[120px_120px_120px_120px] bg-cover bg-center shadow-[0_16px_40px_rgba(0,0,0,0.14)] max-[760px]:min-h-64 max-[420px]:rounded-[72px]"
           role="img"
           aria-label="Cargo ship and containers at an international port"
-          style={{ backgroundImage: "url(https://xpsworldwideexpress.pk/img/theme_image_11.jpg)" }}
+          style={{ backgroundImage: "url(/theme_image_11.jpg)" }}
         />
       </section>
 
@@ -100,7 +100,7 @@ export default function AboutUsPage() {
           className="min-h-75 rounded-[70px_70px_140px_70px] bg-cover bg-center shadow-[0_14px_35px_rgba(0,0,0,0.12)] max-[760px]:order-2 max-[760px]:min-h-64"
           role="img"
           aria-label="Courier handing a parcel to customers"
-          style={{ backgroundImage: "url(https://xpsworldwideexpress.pk/img/post-thumb2-e1599202970322.jpg)" }}
+          style={{ backgroundImage: "url(/post-thumb2-e1599202970322.jpg)" }}
         />
         <div>
           <p className={orangeEyebrow}>People in motion</p>
@@ -131,7 +131,7 @@ export default function AboutUsPage() {
             className="relative z-1 min-h-67 rounded-[110px_110px_110px_110px] bg-cover bg-center shadow-[0_18px_38px_rgba(0,0,0,0.22)] max-[760px]:min-h-58 max-[420px]:rounded-[70px]"
             role="img"
             aria-label="Courier carrying a parcel for delivery"
-            style={{ backgroundImage: "url(https://xpsworldwideexpress.pk/img/4049648-scaled.jpg)" }}
+            style={{ backgroundImage: "url(/4049648-scaled.jpg)" }}
           />
         </div>
       </section>

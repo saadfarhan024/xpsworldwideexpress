@@ -90,7 +90,7 @@ export function AccountAccessForm({ mode }: AccountAccessFormProps) {
             className="relative isolate flex min-h-115 flex-col justify-between overflow-hidden bg-cover bg-center p-[clamp(28px,5vw,56px)] text-white max-[760px]:min-h-75"
             style={{
               backgroundImage:
-                "linear-gradient(145deg,rgba(16,17,20,0.86),rgba(16,17,20,0.68)),url(https://xpsworldwideexpress.pk/img/img-cap6-300x300-1.jpg)",
+                "linear-gradient(145deg,rgba(16,17,20,0.86),rgba(16,17,20,0.68)),url(/img-cap6-300x300-1.jpg)",
             }}
           >
             <div className="pointer-events-none absolute -left-15 -top-20 -z-10 size-60 rounded-full border border-white/15 shadow-[0_0_0_35px_rgb(255_255_255/5%),0_0_0_70px_rgb(255_255_255/4%)]" />

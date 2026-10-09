@@ -16,28 +16,28 @@ const services = [
     title: "Ocean Freight",
     description:
       "We work closely with major seaports around the world to move your cargo reliably.",
-    image: "https://xpsworldwideexpress.pk/img/img-cap6-300x300-1.jpg",
+    image: "/img-cap6-300x300-1.jpg",
     alt: "Cargo ship and containers at an international port",
   },
   {
     title: "Train Freight",
     description:
       "Comprehensive transport for urgent, valuable, fragile, and oversized cargo.",
-    image: "https://xpsworldwideexpress.pk/img/img-cap1-300x300-1.jpg",
+    image: "/img-cap1-300x300-1.jpg",
     alt: "Freight train carrying cargo",
   },
   {
     title: "Air Freight",
     description:
       "Fast international connections for urgent and high-priority shipments.",
-    image: "https://xpsworldwideexpress.pk/img/img-cap3-300x300-1.jpg",
+    image: "/img-cap3-300x300-1.jpg",
     alt: "Air freight aircraft ready for departure",
   },
   {
     title: "Go Delivery Logistics",
     description:
       "Forwarding that moves goods safely, economically, and efficiently to your customers.",
-    image: "https://xpsworldwideexpress.pk/img/img-cap4-300x300-1.jpg",
+    image: "/img-cap4-300x300-1.jpg",
     alt: "Logistics workers coordinating a shipment",
   },
   {
@@ -45,7 +45,7 @@ const services = [
     description:
       "Road transport for business and personal effects, tailored to your delivery needs.",
     image:
-      "https://xpsworldwideexpress.pk/img/img-cap2-1-qwto1z24zwp4crbeopfjro3dchiepuw7o8txth4cs8.jpg",
+      "/img-cap2-1-qwto1z24zwp4crbeopfjro3dchiepuw7o8txth4cs8.jpg",
     alt: "Road freight truck transporting cargo",
   },
   {
@@ -53,7 +53,7 @@ const services = [
     description:
       "Professional packing helps protect your belongings through every leg of the journey.",
     image:
-      "https://xpsworldwideexpress.pk/img/theme_image_02-qwto1z2diw7xg5htuo0r5dnwgbm4tslrter023uxds.jpg",
+      "/theme_image_02-qwto1z2diw7xg5htuo0r5dnwgbm4tslrter023uxds.jpg",
     alt: "Carefully packed goods prepared for transport",
   },
 ];
@@ -88,7 +88,7 @@ export default function ServicesPage() {
         className="relative grid h-[52svh] min-h-110 max-h-170 place-items-center bg-cover bg-[center_48%] text-white max-[760px]:h-[44svh] max-[760px]:min-h-64"
         style={{
           backgroundImage:
-            "linear-gradient(90deg,rgba(9,10,12,0.68),rgba(9,10,12,0.55)),url(https://xpsworldwideexpress.pk/img/theme_image_02.jpg)",
+            "linear-gradient(90deg,rgba(9,10,12,0.68),rgba(9,10,12,0.55)),url(/theme_image_02.jpg)",
         }}
       >
         <div className="relative z-10 px-5 pt-24 text-center max-[760px]:pt-20">

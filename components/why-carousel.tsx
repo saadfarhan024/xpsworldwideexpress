@@ -13,17 +13,17 @@ import {
 const slides = [
   {
     image:
-      "https://xpsworldwideexpress.pk/img/4049421-scaled.jpg",
+      "/4049421-scaled.jpg",
     alt: "A delivery truck carrying cargo",
   },
   {
     image:
-      "https://xpsworldwideexpress.pk/img/4049648-scaled.jpg",
+      "/4049648-scaled.jpg",
     alt: "Packages organized inside a distribution warehouse",
   },
   {
     image:
-      "https://xpsworldwideexpress.pk/img/4049410-scaled.jpg",
+      "/4049410-scaled.jpg",
     alt: "A courier preparing a parcel for delivery",
   },
 ];

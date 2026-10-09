@@ -61,7 +61,7 @@ export function AboutSection() {
         className="min-h-120 rounded-[100px_100px_300px_100px] bg-cover bg-center shadow-[0_0_22px_0_rgba(0,0,0,0.12)] max-[760px]:min-h-92.5 max-[420px]:min-h-75"
         role="img"
         aria-label="A courier handing a parcel to a customer"
-        style={{ backgroundImage: "url(https://xpsworldwideexpress.pk/img/2963.jpg)" }}
+        style={{ backgroundImage: "url(/2963.jpg)" }}
       />
       <div className="max-w-137.5">
         <p className={orangeEyebrow}>Go Delivery Express</p>
@@ -81,7 +81,7 @@ export function PromiseSection() {
   return (
     <section
       className="relative isolate grid min-h-102.5 place-items-center bg-cover bg-position-[center_53%] px-6 py-17.5 text-center text-white"
-      style={{ backgroundImage: "linear-gradient(90deg,rgb(25 19 17 / 80%),rgb(14 16 21 / 67%)),url(https://xpsworldwideexpress.pk/img/Shiping-Truck.jpg)" }}
+      style={{ backgroundImage: "linear-gradient(90deg,rgb(25 19 17 / 80%),rgb(14 16 21 / 67%)),url(/Shiping-Truck.jpg)" }}
     >
       <div className="max-w-192.5">
         <p className={eyebrow}>Reliable by design</p>
@@ -133,7 +133,7 @@ export function ContactSection() {
             Contact Us <ArrowRight aria-hidden="true" />
           </Button>
         </div>
-        <div className="min-h-80 rounded-[300px_100px_100px_100px] bg-cover bg-center shadow-[0_0_22px_0_rgba(0,0,0,0.12)] max-[760px]:min-h-70" role="img" aria-label="Courier delivering a package from a van" style={{ backgroundImage: "url(https://xpsworldwideexpress.pk/img/4049549.jpg)" }} />
+        <div className="min-h-80 rounded-[300px_100px_100px_100px] bg-cover bg-center shadow-[0_0_22px_0_rgba(0,0,0,0.12)] max-[760px]:min-h-70" role="img" aria-label="Courier delivering a package from a van" style={{ backgroundImage: "url(/4049549.jpg)" }} />
       </div>
     </section>
   );

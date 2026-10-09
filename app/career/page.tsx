@@ -29,7 +29,7 @@ export default function CareerPage() {
         className="relative grid h-[52svh] min-h-110 max-h-170 place-items-center bg-cover bg-[center_48%] text-white max-[760px]:h-[44svh] max-[760px]:min-h-64"
         style={{
           backgroundImage:
-            "linear-gradient(90deg,rgba(9,10,12,0.68),rgba(9,10,12,0.55)),url(https://xpsworldwideexpress.pk/img/breadcrumb-carrier.jpg)",
+            "linear-gradient(90deg,rgba(9,10,12,0.68),rgba(9,10,12,0.55)),url(/breadcrumb-carrier.jpg)",
         }}
       >
         <div className="relative z-10 px-5 pt-24 text-center max-[760px]:pt-20">
@@ -54,7 +54,7 @@ export default function CareerPage() {
             className="min-h-105 rounded-[10px] bg-cover bg-center shadow-[0_0_22px_0_rgba(0,0,0,0.12)] max-[760px]:min-h-85 max-[420px]:min-h-70"
             role="img"
             aria-label="A courier handing a parcel to a customer"
-            style={{ backgroundImage: "url(https://xpsworldwideexpress.pk/img/h19hlda8v0m2d0urc.jpg)" }}
+            style={{ backgroundImage: "url(/h19hlda8v0m2d0urc.jpg)" }}
           />
         </section>
       </ScrollReveal>
@@ -69,7 +69,7 @@ export default function CareerPage() {
               className="relative flex min-h-105 items-end overflow-hidden rounded-[10px] bg-cover bg-center p-[clamp(28px,5vw,64px)] text-white shadow-[0_0_22px_0_rgba(0,0,0,0.18)] max-[760px]:min-h-85 max-[420px]:min-h-70"
               style={{
                 backgroundImage:
-                  "linear-gradient(90deg,rgba(9,10,12,0.76),rgba(9,10,12,0.34)),linear-gradient(0deg,rgba(9,10,12,0.62),transparent 78%),url(https://xpsworldwideexpress.pk/img/CTA-About-new.png)",
+                  "linear-gradient(90deg,rgba(9,10,12,0.76),rgba(9,10,12,0.34)),linear-gradient(0deg,rgba(9,10,12,0.62),transparent 78%),url(/CTA-About-new.png)",
               }}
             >
               <div className="max-w-105">
