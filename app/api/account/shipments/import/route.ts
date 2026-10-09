@@ -191,9 +191,11 @@ export async function POST(request: Request) {
           pieces: item.pieces,
           codAmount: item.codAmount,
           status: "CREATED",
+          carrierStatus: "NEW_BOOKED",
           events: {
             create: {
               status: "CREATED",
+              carrierStatus: "NEW_BOOKED",
               publicNote: "Shipment registered via bulk CSV import.",
               actorId: user.id,
             },

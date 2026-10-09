@@ -62,6 +62,8 @@ export async function POST(request: Request) {
     let order: {
       id?: number | string;
       name?: string;
+      created_at?: string;
+      email?: string;
       shipping_address?: {
         name?: string;
         first_name?: string;
@@ -126,17 +128,27 @@ export async function POST(request: Request) {
         data: {
           merchantId: merchant.id,
           trackingCode,
+          productType: "Parcel",
+          serviceType: "Shopify",
+          orderDate: order.created_at ? new Date(order.created_at) : new Date(),
+          pickupCity: merchant.city,
+          pickupName: merchant.contactName,
+          pickupPhone: merchant.phone,
+          pickupAddress: merchant.pickupAddress,
           recipientName,
           recipientPhone,
+          recipientEmail: order.email || null,
           deliveryAddress,
           destinationCity,
           itemDescription,
           pieces: order.line_items ? Math.max(1, order.line_items.length) : 1,
           codAmount,
           status: "CREATED",
+          carrierStatus: "NEW_BOOKED",
           events: {
             create: {
               status: "CREATED",
+              carrierStatus: "NEW_BOOKED",
               publicNote: `Order synced from Shopify (${order.name || order.id}).`,
             },
           },

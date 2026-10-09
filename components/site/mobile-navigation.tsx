@@ -18,9 +18,11 @@ type NavigationLink = {
 
 export function MobileNavigation({
   links,
+  authLinks = [],
   isScrolled,
 }: {
   links: NavigationLink[];
+  authLinks?: NavigationLink[];
   isScrolled: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +61,15 @@ export function MobileNavigation({
               {link.label}
             </a>
           ))}
+          {authLinks.length > 0 && (
+            <div className="mt-3 grid gap-3 border-t border-neutral-200 pt-5">
+              {authLinks.map((link, index) => (
+                <a key={link.label} href={link.href} onClick={() => setIsOpen(false)} className={`rounded-lg px-4 py-3 text-center text-sm font-bold uppercase tracking-wide ${index === 0 ? "bg-[#163e6a] text-white hover:bg-[#ec8123]" : "bg-[#080808] text-white hover:bg-[#252525]"}`}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
         </nav>
       </SheetContent>
     </Sheet>

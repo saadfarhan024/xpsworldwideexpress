@@ -32,6 +32,11 @@ export default async function ShipmentLabelPage({ params }: Props) {
   if (!shipment) notFound();
 
   const isCod = shipment.codAmount && Number(shipment.codAmount) > 0;
+  const money = (value: unknown) => value == null ? "—" : `PKR ${Number(value).toFixed(2)}`;
+  const senderName = shipment.pickupName || shipment.merchant.contactName;
+  const senderPhone = shipment.pickupPhone || shipment.merchant.phone;
+  const senderAddress = [shipment.pickupAddress || shipment.merchant.pickupAddress, shipment.pickupAddressLine2].filter(Boolean).join("\n");
+  const senderCity = shipment.pickupCity || shipment.merchant.city;
 
   return (
     <div className="min-h-screen bg-[#f3f4f6] p-4 font-sans text-black print:bg-white print:p-0">
@@ -63,10 +68,10 @@ export default async function ShipmentLabelPage({ params }: Props) {
             </div>
             <div className="text-right">
               <span className="inline-block border border-black px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider">
-                DOMESTIC OVERNIGHT
+                {shipment.serviceType.toUpperCase()}
               </span>
               <p className="m-0 mt-0.5 text-[10px] text-gray-600">
-                {new Date(shipment.createdAt).toLocaleDateString()}
+                Order date: {new Date(shipment.orderDate).toLocaleDateString()}
               </p>
             </div>
           </div>
@@ -96,9 +101,11 @@ export default async function ShipmentLabelPage({ params }: Props) {
             </span>
             <p className="m-0 text-[18px] font-bold text-black">{shipment.recipientName}</p>
             <p className="m-0 text-[13px] font-bold text-black">Tel: {shipment.recipientPhone}</p>
+            {shipment.recipientEmail && <p className="m-0 text-[11px] text-gray-700">{shipment.recipientEmail}</p>}
             <p className="m-0 mt-1 whitespace-pre-wrap text-[13px] leading-snug text-gray-800">
               {shipment.deliveryAddress}
             </p>
+            {shipment.googleAddress && <p className="m-0 mt-1 text-[11px] text-gray-600">Map: {shipment.googleAddress}</p>}
             <p className="m-0 mt-1 text-[13px] font-bold uppercase text-black">
               City: {shipment.destinationCity}
             </p>
@@ -111,9 +118,10 @@ export default async function ShipmentLabelPage({ params }: Props) {
                 RETURN / SENDER:
               </span>
               <p className="m-0 font-bold text-black">{shipment.merchant.companyName}</p>
-              <p className="m-0 text-gray-700">{shipment.merchant.pickupAddress}</p>
+              <p className="m-0 text-gray-700">{senderName} · {senderPhone}</p>
+              <p className="m-0 whitespace-pre-wrap text-gray-700">{senderAddress}</p>
               <p className="m-0 text-gray-700">
-                {shipment.merchant.city} · Tel: {shipment.merchant.phone}
+                {senderCity}{shipment.pickupEmail ? ` · ${shipment.pickupEmail}` : ""}
               </p>
             </div>
             <div>
@@ -123,8 +131,17 @@ export default async function ShipmentLabelPage({ params }: Props) {
               <p className="m-0 text-gray-700">
                 Desc: {shipment.itemDescription || "General parcel goods"}
               </p>
+              <p className="m-0 text-gray-700">Product: {shipment.productType} · Weight: {shipment.weightKg ? `${Number(shipment.weightKg).toFixed(3)} kg` : "—"}</p>
+              <p className="m-0 text-gray-700">Ref: {shipment.referenceNumber || "—"} · Order: {shipment.orderId || "—"}</p>
               <p className="m-0 text-gray-700">Status: {formatStatusLabel(shipment.status)}</p>
+              {shipment.allowToOpen && <p className="m-0 font-bold text-black">ALLOW TO OPEN</p>}
             </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 border-b-2 border-black py-2 text-center text-[10px]">
+            <div><span className="block font-bold uppercase text-gray-500">Delivery charges</span><span className="font-bold">{money(shipment.deliveryCharges)}</span></div>
+            <div><span className="block font-bold uppercase text-gray-500">Total charges</span><span className="font-bold">{money(shipment.totalCharges)}</span></div>
+            <div><span className="block font-bold uppercase text-gray-500">Net amount</span><span className="font-bold">{money(shipment.netAmount)}</span></div>
           </div>
 
           {/* COD / Payment Banner */}

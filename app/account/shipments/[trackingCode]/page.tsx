@@ -38,20 +38,33 @@ export default async function ShipmentDetailsPage({ params }: PageProps<"/accoun
 
       <div className="mt-7 grid grid-cols-2 gap-4 max-[600px]:grid-cols-1">
         <article className="rounded-xl border border-[#e5e6e9] bg-white p-5">
+          <h2 className="mb-4 mt-0 text-[16px] font-semibold text-[#25262a]">Order details</h2>
+          <dl className="grid gap-3 text-[13px]">
+            <div><dt className="text-[#898a90]">Product / service</dt><dd className="m-0 text-[#34353a]">{shipment.productType} · {shipment.serviceType}</dd></div>
+            <div><dt className="text-[#898a90]">Order date</dt><dd className="m-0 text-[#34353a]">{new Date(shipment.orderDate).toLocaleDateString()}</dd></div>
+            <div><dt className="text-[#898a90]">Reference / order ID</dt><dd className="m-0 text-[#34353a]">{shipment.referenceNumber || "—"} {shipment.orderId ? `· ${shipment.orderId}` : ""}</dd></div>
+            <div><dt className="text-[#898a90]">Allow to open</dt><dd className="m-0 text-[#34353a]">{shipment.allowToOpen ? "Yes" : "No"}</dd></div>
+          </dl>
+        </article>
+        <article className="rounded-xl border border-[#e5e6e9] bg-white p-5">
           <h2 className="mb-4 mt-0 text-[16px] font-semibold text-[#25262a]">Delivery details</h2>
           <dl className="grid gap-3 text-[13px]">
             <div><dt className="text-[#898a90]">Recipient</dt><dd className="m-0 text-[#34353a]">{shipment.recipientName}</dd></div>
             <div><dt className="text-[#898a90]">Phone</dt><dd className="m-0 text-[#34353a]">{shipment.recipientPhone}</dd></div>
             <div><dt className="text-[#898a90]">Delivery address</dt><dd className="m-0 text-[#34353a]">{shipment.deliveryAddress}</dd></div>
             <div><dt className="text-[#898a90]">Destination</dt><dd className="m-0 text-[#34353a]">{shipment.destinationCity}</dd></div>
+            <div><dt className="text-[#898a90]">Email</dt><dd className="m-0 text-[#34353a]">{shipment.recipientEmail || "—"}</dd></div>
+            <div><dt className="text-[#898a90]">Google address</dt><dd className="m-0 text-[#34353a]">{shipment.googleAddress || "—"}</dd></div>
           </dl>
         </article>
         <article className="rounded-xl border border-[#e5e6e9] bg-white p-5">
           <h2 className="mb-4 mt-0 text-[16px] font-semibold text-[#25262a]">Parcel details</h2>
           <dl className="grid gap-3 text-[13px]">
             <div><dt className="text-[#898a90]">Description</dt><dd className="m-0 text-[#34353a]">{shipment.itemDescription || "Not provided"}</dd></div>
-            <div><dt className="text-[#898a90]">Parcels</dt><dd className="m-0 text-[#34353a]">{shipment.pieces}</dd></div>
+            <div><dt className="text-[#898a90]">Parcels / weight</dt><dd className="m-0 text-[#34353a]">{shipment.pieces} · {shipment.weightKg ? `${shipment.weightKg.toFixed(3)} kg` : "—"}</dd></div>
             <div><dt className="text-[#898a90]">Cash on delivery</dt><dd className="m-0 text-[#34353a]">{shipment.codAmount ? `PKR ${shipment.codAmount.toFixed(2)}` : "None"}</dd></div>
+            <div><dt className="text-[#898a90]">Net amount</dt><dd className="m-0 text-[#34353a]">{shipment.netAmount ? `PKR ${shipment.netAmount.toFixed(2)}` : "—"}</dd></div>
+            <div><dt className="text-[#898a90]">Instructions</dt><dd className="m-0 text-[#34353a]">{shipment.specialInstruction || "—"}</dd></div>
             <div><dt className="text-[#898a90]">Created</dt><dd className="m-0 text-[#34353a]">{new Date(shipment.createdAt).toLocaleString()}</dd></div>
           </dl>
         </article>

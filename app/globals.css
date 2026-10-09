@@ -26,6 +26,14 @@
   --border: #e4e4e7;
   --ring: #163e6a;
   --radius: 0.35rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #34353a;
+  --sidebar-primary: #163e6a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f4f8;
+  --sidebar-accent-foreground: #163e6a;
+  --sidebar-border: #dfe3e8;
+  --sidebar-ring: #163e6a;
 }
 
 @layer base {
@@ -50,6 +58,12 @@
     outline-offset: 3px;
     border-radius: 2px;
   }
+}
+
+[data-slot="sidebar-inner"],
+[data-sidebar="sidebar"][data-mobile="true"] {
+  background-color: var(--sidebar);
+  color: var(--sidebar-foreground);
 }
 
 @media (prefers-reduced-motion: reduce) {

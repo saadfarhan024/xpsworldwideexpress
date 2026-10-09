@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, Upload, Building2, UserRound, Truck, LockKeyhole } from "lucide-react";
 import { pageWrap } from "@/components/site/styles";
+import { PAKISTAN_CITIES } from "@/lib/pakistan-cities";
 
 type RegistrationValues = {
   company: string;
@@ -306,7 +307,7 @@ export function RegisterForm() {
           {step === 2 && (
             <div className="grid grid-cols-2 gap-x-5 gap-y-5 max-[600px]:grid-cols-1">
               <TextField id="website" label="Website URL (optional)" value={values.website} onChange={updateValue} error={errors.website} placeholder="https://yourstore.com" />
-              <SelectField id="city" label="City" value={values.city} onChange={updateValue} options={["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Faisalabad", "Multan", "Peshawar", "Quetta", "Hyderabad", "Sialkot", "Gujranwala", "Other"]} error={errors.city} required />
+              <SelectField id="city" label="City" value={values.city} onChange={updateValue} options={Array.from(new Set([...PAKISTAN_CITIES, "Other"]))} error={errors.city} required />
               <SelectField id="accountNature" label="Nature of account" value={values.accountNature} onChange={updateValue} options={["Individual", "Sole proprietorship", "Partnership", "Private limited company", "Other"]} error={errors.accountNature} required />
               <SelectField id="productType" label="Product type" value={values.productType} onChange={updateValue} options={["Documents", "Clothing and fashion", "Electronics", "Health and beauty", "Food and grocery", "Home and lifestyle", "General merchandise", "Other"]} error={errors.productType} required />
               <SelectField id="shipmentVolume" label="Expected average shipments / month" value={values.shipmentVolume} onChange={updateValue} options={["1–50", "51–100", "101–250", "251–500", "501–1,000", "More than 1,000"]} error={errors.shipmentVolume} required />

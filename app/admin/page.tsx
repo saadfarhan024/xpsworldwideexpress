@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BriefcaseBusiness, Boxes, ClipboardList, UsersRound } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { AdminApplications } from "@/components/site/admin-applications";
 import { requireAdminPortal } from "@/lib/auth/session";
@@ -18,22 +19,26 @@ export default async function AdminPage() {
       <h1 className="m-0 text-[clamp(30px,4vw,46px)] font-semibold text-[#202126]">
         {user.role === "ADMIN" ? "Admin dashboard" : `${user.role.toLowerCase()} dashboard`}
       </h1>
-      <div className="mt-9 grid max-w-260 grid-cols-4 gap-5 max-[900px]:grid-cols-2 max-[500px]:grid-cols-1">
-        <article className="rounded-2xl border border-[#e5e6e9] bg-white p-6 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
-          <p className="m-0 text-[13px] text-[#6d6e74]">Open pickups</p>
-          <p className="mb-0 mt-2 text-[34px] font-semibold text-[#202126]">{openPickups}</p>
+      <div className="mt-9 grid max-w-280 grid-cols-4 gap-5 max-[1000px]:grid-cols-2 max-[500px]:grid-cols-1">
+        <article className="relative overflow-hidden rounded-2xl border border-[#e1e5ea] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.06)]">
+          <span className="absolute inset-x-0 top-0 h-1 bg-[#ec8123]" aria-hidden="true" /><ClipboardList className="mb-5 size-6 text-[#ec8123]" aria-hidden="true" />
+          <p className="m-0 text-[13px] font-bold text-[#3f4148]">Open pickups</p>
+          <p className="mb-0 mt-2 text-[36px] font-semibold text-[#163e6a]">{openPickups}</p>
         </article>
-        <article className="rounded-2xl border border-[#e5e6e9] bg-white p-6 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
-          <p className="m-0 text-[13px] text-[#6d6e74]">Total shipments</p>
-          <p className="mb-0 mt-2 text-[34px] font-semibold text-[#202126]">{totalShipments}</p>
+        <article className="relative overflow-hidden rounded-2xl border border-[#e1e5ea] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.06)]">
+          <span className="absolute inset-x-0 top-0 h-1 bg-[#163e6a]" aria-hidden="true" /><Boxes className="mb-5 size-6 text-[#163e6a]" aria-hidden="true" />
+          <p className="m-0 text-[13px] font-bold text-[#3f4148]">Total shipments</p>
+          <p className="mb-0 mt-2 text-[36px] font-semibold text-[#163e6a]">{totalShipments}</p>
         </article>
-        <article className="rounded-2xl border border-[#e5e6e9] bg-white p-6 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
-          <p className="m-0 text-[13px] text-[#6d6e74]">Pending merchants</p>
-          <p className="mb-0 mt-2 text-[34px] font-semibold text-[#202126]">{pendingApplications}</p>
+        <article className="relative overflow-hidden rounded-2xl border border-[#e1e5ea] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.06)]">
+          <span className="absolute inset-x-0 top-0 h-1 bg-[#e2b21d]" aria-hidden="true" /><UsersRound className="mb-5 size-6 text-[#b48700]" aria-hidden="true" />
+          <p className="m-0 text-[13px] font-bold text-[#3f4148]">Pending merchants</p>
+          <p className="mb-0 mt-2 text-[36px] font-semibold text-[#163e6a]">{pendingApplications}</p>
         </article>
-        <article className="rounded-2xl border border-[#e5e6e9] bg-white p-6 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
-          <p className="m-0 text-[13px] text-[#6d6e74]">Active merchants</p>
-          <p className="mb-0 mt-2 text-[34px] font-semibold text-[#202126]">{activeMerchants}</p>
+        <article className="relative overflow-hidden rounded-2xl border border-[#e1e5ea] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.06)]">
+          <span className="absolute inset-x-0 top-0 h-1 bg-[#43a85b]" aria-hidden="true" /><BriefcaseBusiness className="mb-5 size-6 text-[#318044]" aria-hidden="true" />
+          <p className="m-0 text-[13px] font-bold text-[#3f4148]">Active merchants</p>
+          <p className="mb-0 mt-2 text-[36px] font-semibold text-[#163e6a]">{activeMerchants}</p>
         </article>
       </div>
       <div className="mt-7 flex flex-wrap gap-3">

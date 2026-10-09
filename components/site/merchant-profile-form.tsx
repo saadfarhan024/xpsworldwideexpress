@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { ArrowRight, Trash2, Upload } from "lucide-react";
+import { PAKISTAN_CITIES } from "@/lib/pakistan-cities";
 
 type Profile = {
   email: string;
@@ -22,7 +23,7 @@ const inputClass =
   "mt-2 h-12.5 w-full rounded-lg border border-[#e1e2e5] bg-white px-4 text-[14px] text-[#25262a] outline-none transition placeholder:text-[#9a9ba0] focus:border-[#163e6a] focus:ring-3 focus:ring-[#163e6a]/10";
 const labelClass = "block text-[13px] font-medium text-[#45464b]";
 
-const cities = ["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Faisalabad", "Multan", "Peshawar", "Quetta", "Hyderabad", "Sialkot", "Gujranwala", "Other"];
+const cities = Array.from(new Set([...PAKISTAN_CITIES, "Other"]));
 const accountNatures = ["Individual", "Sole proprietorship", "Partnership", "Private limited company", "Other"];
 const productTypes = ["Documents", "Clothing and fashion", "Electronics", "Health and beauty", "Food and grocery", "Home and lifestyle", "General merchandise", "Other"];
 const volumes = ["1–50", "51–100", "101–250", "251–500", "501–1,000", "More than 1,000"];

@@ -16,7 +16,7 @@ export function SignOutButton() {
 
   return (
     <button
-      className="rounded-md border border-white/25 px-3.5 py-2 text-[12px] font-semibold uppercase tracking-wide text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-60"
+      className="rounded-md border border-white/25 px-3.5 py-2 text-[12px] font-semibold uppercase tracking-wide text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-60 w-full"
       type="button"
       onClick={signOut}
       disabled={isSigningOut}

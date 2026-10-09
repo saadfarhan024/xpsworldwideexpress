@@ -1,23 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { prisma } from "@/lib/db";
-import { isValidTransition, TERMINAL_STATUSES } from "@/lib/shipments";
-import type { ShipmentStatus } from "@prisma/client";
-
-// Status mapping from external carrier events to GDE shipment statuses
-const CARRIER_STATUS_MAP: Record<string, ShipmentStatus> = {
-  MANIFEST_RECEIVED: "CREATED",
-  PICKED_UP: "PICKED_UP",
-  IN_TRANSIT: "IN_TRANSIT",
-  ARRIVED_AT_SORT_FACILITY: "AT_HUB",
-  DEPARTED_FACILITY: "IN_TRANSIT",
-  OUT_FOR_DELIVERY: "OUT_FOR_DELIVERY",
-  DELIVERED: "DELIVERED",
-  DELIVERY_ATTEMPT_FAILED: "DELIVERY_ATTEMPTED",
-  DELIVERY_EXCEPTION: "ON_HOLD",
-  RETURN_TO_SENDER: "RETURNED",
-  CANCELLED: "CANCELLED",
-};
+import { CARRIER_STATUS_MAP, isValidTransition, normalizeCarrierStatus, TERMINAL_STATUSES } from "@/lib/shipments";
 
 function verifySignature(payload: string, signature: string | null, secret: string): boolean {
   if (!signature || !secret) return false;
@@ -57,15 +41,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Invalid JSON payload." }, { status: 400 });
   }
 
-  const { eventId, trackingCode, status: carrierStatus, location, notes, occurredAt } = body;
+  const { eventId, trackingCode, status, location, notes, occurredAt } = body;
 
-  if (!trackingCode || !carrierStatus) {
+  if (!trackingCode || !status) {
     return NextResponse.json({ message: "Tracking code and carrier status are required." }, { status: 400 });
   }
 
-  const gdeStatus = CARRIER_STATUS_MAP[carrierStatus];
-  if (!gdeStatus) {
-    return NextResponse.json({ message: `Unrecognized carrier status: ${carrierStatus}` }, { status: 400 });
+  const carrierStatus = normalizeCarrierStatus(status);
+  const gdeStatus = carrierStatus ? CARRIER_STATUS_MAP[carrierStatus] : null;
+  if (!carrierStatus || !gdeStatus) {
+    return NextResponse.json({ message: `Unrecognized carrier status: ${status}` }, { status: 400 });
   }
 
   const shipment = await prisma.shipment.findUnique({
@@ -117,6 +102,7 @@ export async function POST(request: Request) {
         where: { id: shipment.id },
         data: {
           status: gdeStatus,
+          carrierStatus,
           ...(gdeStatus === "DELIVERED" && shipment.codAmount && !shipment.collectedAmount
             ? { collectedAmount: shipment.codAmount }
             : {}),
@@ -128,6 +114,7 @@ export async function POST(request: Request) {
       data: {
         shipmentId: shipment.id,
         status: gdeStatus,
+        carrierStatus,
         location: location || null,
         publicNote,
         internalNote: eventId ? `Inbound Carrier Webhook EventID: ${eventId}` : null,
@@ -140,7 +127,7 @@ export async function POST(request: Request) {
         action: "CARRIER_WEBHOOK_EVENT_PROCESSED",
         entityType: "Shipment",
         entityId: shipment.id,
-        summary: `Carrier webhook updated shipment ${trackingCode} to ${gdeStatus}${eventId ? ` (Event ${eventId})` : ""}.`,
+        summary: `Carrier webhook updated shipment ${trackingCode} to ${carrierStatus}${eventId ? ` (Event ${eventId})` : ""}.`,
       },
     });
   });

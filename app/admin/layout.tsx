@@ -1,24 +1,22 @@
 import type { ReactNode } from "react";
-import { SignOutButton } from "@/components/site/sign-out-button";
+import Link from "next/link";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { PortalSidebar } from "@/components/site/portal-sidebar";
 import { requireAdminPortal } from "@/lib/auth/session";
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const user = await requireAdminPortal();
-  return (
-    <main className="min-h-screen bg-[#f6f6f7]">
-      <header className="bg-[#16171a] text-white">
-        <div className="mx-auto flex min-h-20 max-w-300 items-center justify-between gap-5 px-5">
-          <a className="text-[15px] font-bold tracking-[0.08em]" href="/admin">GO DELIVERY ADMIN</a>
-          <div className="flex items-center gap-4">
-            {user.role === "ADMIN" && (
-              <a className="hidden text-[12px] font-semibold text-white/80 hover:text-white sm:block" href="/admin/shipments">Shipments</a>
-            )}
-            <a className="hidden text-[12px] font-semibold text-white/80 hover:text-white sm:block" href="/admin/merchants">Merchants</a>
-            <SignOutButton />
-          </div>
-        </div>
-      </header>
-      {children}
-    </main>
-  );
+  const items = [
+    { href: "/admin", label: "Overview", icon: "BarChart3" as const, show: true },
+    { href: "/admin/pickups", label: "Pickup queue", icon: "ClipboardList" as const, show: user.role === "ADMIN" || user.role === "OPERATIONS" },
+    { href: "/admin/shipments", label: "Shipments", icon: "Boxes" as const, show: user.role === "ADMIN" || user.role === "OPERATIONS" },
+    { href: "/admin/remittances", label: "COD remittances", icon: "Landmark" as const, show: user.role === "ADMIN" || user.role === "FINANCE" },
+    { href: "/admin/merchants", label: "Merchants", icon: "Store" as const, show: true },
+    { href: "/admin/tickets", label: "Support tickets", icon: "Ticket" as const, show: user.role === "ADMIN" || user.role === "SUPPORT" || user.role === "OPERATIONS" },
+    { href: "/admin/staff", label: "Staff accounts", icon: "Users" as const, show: user.role === "ADMIN" },
+    { href: "/admin/audit", label: "Audit log", icon: "FileClock" as const, show: user.role === "ADMIN" },
+    { href: "/admin/settings", label: "System settings", icon: "Settings" as const, show: user.role === "ADMIN" },
+  ].filter((item) => item.show);
+
+  return <SidebarProvider><PortalSidebar items={items} admin /><SidebarInset className="bg-[#f6f6f7]"><header className="sticky top-0 z-20 flex min-h-16 items-center gap-3 border-b border-[#0f3155] bg-[#163e6a] px-4 text-white shadow-sm"><SidebarTrigger className="text-white hover:bg-white/10 hover:text-white" /><Link className="text-[13px] font-bold uppercase tracking-[0.12em]" href="/admin">Admin dashboard</Link></header>{children}</SidebarInset></SidebarProvider>;
 }

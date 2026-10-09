@@ -196,23 +196,45 @@ model EmailVerificationToken {
 }
 
 model Shipment {
-  id                 String         @id @default(cuid())
-  merchantId         String
-  trackingCode       String         @unique
-  status             ShipmentStatus @default(CREATED)
-  serviceName        String?
-  recipientName      String
-  recipientPhone     String
-  deliveryAddress    String
-  destinationCity    String
-  itemDescription    String?
-  pieces             Int            @default(1)
-  codAmount          Decimal?       @db.Decimal(12, 2)
-  collectedAmount    Decimal?       @db.Decimal(12, 2)
-  publicSummary      String?
-  internalNote       String?
-  createdAt          DateTime       @default(now())
-  updatedAt          DateTime       @updatedAt
+  id                   String         @id @default(cuid())
+  merchantId           String
+  trackingCode         String         @unique
+  status               ShipmentStatus @default(CREATED)
+  carrierStatus        String?
+  productType          String         @default("Parcel")
+  serviceType          String         @default("Overnight")
+  orderDate            DateTime       @default(now())
+  pickupCity           String?
+  pickupProfile        String?
+  pickupName           String?
+  pickupPhone          String?
+  pickupEmail          String?
+  pickupAddress        String?
+  pickupAddressLine2   String?
+  recipientName        String
+  recipientPhone       String
+  recipientEmail       String?
+  deliveryAddress      String
+  googleAddress        String?
+  destinationCity      String
+  itemDescription      String?
+  specialInstruction   String?
+  referenceNumber      String?
+  orderId              String?
+  pieces               Int            @default(1)
+  weightKg             Decimal?       @db.Decimal(10, 3)
+  allowToOpen          Boolean        @default(false)
+  codAmount            Decimal?       @db.Decimal(12, 2)
+  deliveryCharges      Decimal?       @db.Decimal(12, 2)
+  totalCharges         Decimal?       @db.Decimal(12, 2)
+  fuelSurchargePercent Decimal?       @db.Decimal(6, 2)
+  salesTax             Decimal?       @db.Decimal(12, 2)
+  netAmount            Decimal?       @db.Decimal(12, 2)
+  collectedAmount      Decimal?       @db.Decimal(12, 2)
+  publicSummary        String?
+  internalNote         String?
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
   merchant           MerchantProfile @relation(fields: [merchantId], references: [id], onDelete: Restrict)
   events             TrackingEvent[]
   pickupRequest      PickupRequest?
@@ -221,7 +243,9 @@ model Shipment {
   remittance         Remittance?    @relation(fields: [remittanceId], references: [id], onDelete: SetNull)
 
   @@index([merchantId, createdAt])
+  @@index([merchantId, orderDate])
   @@index([status, updatedAt])
+  @@index([merchantId, carrierStatus])
   @@index([remittanceId])
 }
 
@@ -229,6 +253,7 @@ model TrackingEvent {
   id          String         @id @default(cuid())
   shipmentId  String
   status      ShipmentStatus
+  carrierStatus String?
   location    String?
   publicNote  String
   internalNote String?
