@@ -41,7 +41,7 @@ export default async function AccountPage() {
           <div className="rounded-2xl border border-[#e5e6e9] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.04)]" key={label}>
             <Icon className="mb-5 size-6 text-[#ec8123]" aria-hidden="true" />
             <p className="m-0 text-[13px] font-medium text-[#6d6e74]">{label}</p>
-            <p className="mb-1 mt-1 text-[34px] font-semibold text-[#202126]">{value}</p>
+            <p className="mb-1 mt-1 !text-[46px] font-bold leading-none text-[#163e6a]">{value}</p>
             <p className="m-0 text-[12px] text-[#85868c]">{detail}</p>
           </div>
         ))}
@@ -54,12 +54,12 @@ export default async function AccountPage() {
           </div>
           <Link className="inline-flex items-center gap-2 rounded-lg bg-[#163e6a] px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-[#ec8123]" href="/account/shipments">Track Orders <ArrowRight className="size-4" aria-hidden="true" /></Link>
         </div>
-        <div className="mt-6 grid grid-cols-4 gap-4 max-[1200px]:grid-cols-3 max-[900px]:grid-cols-2 max-[600px]:grid-cols-1">
+        <div className="mt-6 grid grid-cols-3 gap-4 max-[1200px]:grid-cols-3 max-[900px]:grid-cols-2 max-[600px]:grid-cols-1">
           {stats.statuses.map((status) => (
-            <div className="relative min-h-25 overflow-hidden rounded-xl border border-[#e1e5ea] bg-white p-4 shadow-[0_6px_18px_rgba(24,25,30,0.06)] transition hover:-translate-y-0.5 hover:border-[#163e6a]/30 hover:shadow-[0_10px_24px_rgba(24,25,30,0.1)]" key={status.key}>
+            <div className="relative flex min-h-25 items-center justify-between gap-4 overflow-hidden rounded-xl border border-[#e1e5ea] bg-white p-4 shadow-[0_6px_18px_rgba(24,25,30,0.06)] transition hover:-translate-y-0.5 hover:border-[#163e6a]/30 hover:shadow-[0_10px_24px_rgba(24,25,30,0.1)]" key={status.key}>
               <span className="absolute inset-x-0 top-0 h-1 bg-[#ec8123]" aria-hidden="true" />
-              <span className="block pr-2 text-[12px] font-bold leading-4 text-[#3f4148]">{status.label}</span>
-              <span className="mt-3 block text-[28px] font-semibold leading-none text-[#163e6a]">{status.count}</span>
+              <span className="min-w-0 pr-2 text-[20px] font-bold leading-5.5 text-[#34363d]">{status.label}</span>
+              <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#163e6a] text-[24px] font-black leading-none text-white shadow-sm">{status.count}</span>
             </div>
           ))}
         </div>

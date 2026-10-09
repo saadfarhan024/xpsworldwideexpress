@@ -18,5 +18,5 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     { href: "/admin/settings", label: "System settings", icon: "Settings" as const, show: user.role === "ADMIN" },
   ].filter((item) => item.show);
 
-  return <SidebarProvider><PortalSidebar items={items} admin /><SidebarInset className="bg-[#f6f6f7]"><header className="sticky top-0 z-20 flex min-h-16 items-center gap-3 border-b border-[#0f3155] bg-[#163e6a] px-4 text-white shadow-sm"><SidebarTrigger className="text-white hover:bg-white/10 hover:text-white" /><Link className="text-[13px] font-bold uppercase tracking-[0.12em]" href="/admin">Admin dashboard</Link></header>{children}</SidebarInset></SidebarProvider>;
+  return <SidebarProvider><PortalSidebar items={items} admin /><SidebarInset className="dashboard-scale bg-[#f6f6f7]"><header className="sticky top-0 z-20 flex min-h-16 items-center gap-3 border-b border-[#0f3155] bg-[#163e6a] px-4 text-white shadow-sm"><SidebarTrigger className="text-white hover:bg-white/10 hover:text-white" /><Link className="text-[13px] font-bold uppercase tracking-[0.12em]" href="/admin">Admin dashboard</Link></header>{children}</SidebarInset></SidebarProvider>;
 }

@@ -18,7 +18,9 @@ function Field({ label, name, required, children, className = "" }: { label: str
   return <label className={`${labelClass} ${className}`} htmlFor={name}>{required && requiredMark}{label}{children}</label>;
 }
 
-export function ShipmentCreateForm() {
+type PickupDefaults = { city: string; name: string; phone: string; email: string; address: string };
+
+export function ShipmentCreateForm({ pickupDefaults }: { pickupDefaults: PickupDefaults }) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -61,12 +63,12 @@ export function ShipmentCreateForm() {
 
     <div className="grid grid-cols-2 items-start gap-6 max-[1100px]:grid-cols-1">
       <Section title="Pickup Details"><div className="grid grid-cols-2 gap-4 max-[600px]:grid-cols-1">
-        <Field label="City/Area" name="pickupCity" required><input className={`${fieldClass} ${readonlyClass} cursor-not-allowed`} id="pickupCity" name="pickupCity" defaultValue="Karachi" readOnly required /></Field>
+        <Field label="City/Area" name="pickupCity" required><input className={`${fieldClass} ${readonlyClass} cursor-not-allowed`} id="pickupCity" name="pickupCity" defaultValue={pickupDefaults.city} readOnly required /></Field>
         <Field label="Select Profile" name="pickupProfile"><select className={fieldClass} id="pickupProfile" name="pickupProfile" defaultValue="Primary pickup profile"><option>Primary pickup profile</option></select></Field>
-        <Field label="Name" name="pickupName" required><input className={fieldClass} id="pickupName" name="pickupName" autoComplete="name" required /></Field>
-        <Field label="Phone" name="pickupPhone" required><input className={fieldClass} id="pickupPhone" name="pickupPhone" type="tel" autoComplete="tel" required /></Field>
-        <Field label="Email" name="pickupEmail" required className="col-span-2 max-[600px]:col-span-1"><input className={fieldClass} id="pickupEmail" name="pickupEmail" type="email" autoComplete="email" required /></Field>
-        <Field label="Address" name="pickupAddress" required className="col-span-2 max-[600px]:col-span-1"><textarea className={`${fieldClass} h-auto min-h-20 resize-y py-3`} id="pickupAddress" name="pickupAddress" required /></Field>
+        <Field label="Name" name="pickupName" required><input className={fieldClass} id="pickupName" name="pickupName" autoComplete="name" defaultValue={pickupDefaults.name} required /></Field>
+        <Field label="Phone" name="pickupPhone" required><input className={fieldClass} id="pickupPhone" name="pickupPhone" type="tel" autoComplete="tel" defaultValue={pickupDefaults.phone} required /></Field>
+        <Field label="Email" name="pickupEmail" required className="col-span-2 max-[600px]:col-span-1"><input className={fieldClass} id="pickupEmail" name="pickupEmail" type="email" autoComplete="email" defaultValue={pickupDefaults.email} required /></Field>
+        <Field label="Address" name="pickupAddress" required className="col-span-2 max-[600px]:col-span-1"><textarea className={`${fieldClass} h-auto min-h-20 resize-y py-3`} id="pickupAddress" name="pickupAddress" defaultValue={pickupDefaults.address} required /></Field>
         <Field label="Pickup Address" name="pickupAddressLine2" className="col-span-2 max-[600px]:col-span-1"><textarea className={`${fieldClass} h-auto min-h-20 resize-y py-3`} id="pickupAddressLine2" name="pickupAddressLine2" /></Field>
       </div></Section>
 

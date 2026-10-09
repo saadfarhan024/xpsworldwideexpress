@@ -1,68 +1,37 @@
+import { LoadSheetTable, type LoadSheetRow } from "@/components/site/load-sheet-table";
 import { requireMerchant } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
-import { MerchantPickupsList, type MerchantPickup } from "@/components/site/merchant-pickups-list";
-import { Plus } from "lucide-react";
-import Link from "next/link";
 
-export default async function MerchantPickupsPage() {
+type PageProps = { searchParams: Promise<{ rider?: string; from?: string; to?: string }> };
+
+function dateValue(value: string | undefined, fallback: Date) {
+  return value && !Number.isNaN(new Date(`${value}T00:00:00.000Z`).getTime()) ? value : fallback.toISOString().slice(0, 10);
+}
+
+export default async function GenerateLoadSheetPage({ searchParams }: PageProps) {
   const user = await requireMerchant();
-
-  const rawPickups = await prisma.pickupRequest.findMany({
-    where: { merchantId: user.merchantProfile!.id },
-    include: {
-      assignedTo: { select: { email: true } },
-      shipments: {
-        include: {
-          shipment: {
-            select: {
-              id: true,
-              trackingCode: true,
-              recipientName: true,
-              destinationCity: true,
-              pieces: true,
-              status: true,
-            },
-          },
-        },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  });
-
-  const pickups: MerchantPickup[] = rawPickups.map((p) => ({
-    id: p.id,
-    status: p.status,
-    pickupAddress: p.pickupAddress,
-    contactPerson: p.contactPerson,
-    contactPhone: p.contactPhone,
-    timeWindow: p.timeWindow,
-    requestedFor: p.requestedFor ? p.requestedFor.toISOString() : null,
-    note: p.note,
-    createdAt: p.createdAt.toISOString(),
-    assignedTo: p.assignedTo,
-    shipments: p.shipments,
+  const merchant = user.merchantProfile;
+  if (!merchant) return null;
+  const query = await searchParams;
+  const today = new Date();
+  const from = dateValue(query.from, new Date(today.getFullYear(), today.getMonth(), 1));
+  const to = dateValue(query.to, today);
+  const [riders, shipments] = await Promise.all([
+    prisma.user.findMany({ where: { role: { in: ["ADMIN", "OPERATIONS"] }, status: "ACTIVE" }, select: { id: true, email: true }, orderBy: { email: "asc" } }),
+    prisma.shipment.findMany({ where: { merchantId: merchant.id, status: "CREATED", createdAt: { gte: new Date(`${from}T00:00:00.000Z`), lte: new Date(`${to}T23:59:59.999Z`) } }, include: { merchant: true }, orderBy: { createdAt: "desc" } }),
+  ]);
+  const rows: LoadSheetRow[] = shipments.map((shipment) => ({
+    id: shipment.id,
+    date: shipment.createdAt.toLocaleDateString(),
+    trackingCode: shipment.trackingCode,
+    pickupInfo: [shipment.pickupName || merchant.contactName, shipment.pickupPhone || merchant.phone, shipment.pickupAddress || merchant.pickupAddress].join(" · "),
+    deliveryInfo: [shipment.recipientName, shipment.recipientPhone, shipment.deliveryAddress].join(" · "),
+    quantity: shipment.pieces,
+    pickupCity: shipment.pickupCity || merchant.city,
+    deliveryCity: shipment.destinationCity,
+    weight: shipment.weightKg ? Number(shipment.weightKg) : null,
+    codAmount: shipment.codAmount ? Number(shipment.codAmount) : null,
   }));
 
-  return (
-    <section className="mx-auto min-h-125 max-w-300 px-5 py-12">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.17em] text-[#163e6a]">
-            Merchant portal
-          </p>
-          <h1 className="m-0 text-[clamp(30px,4vw,42px)] font-semibold text-[#202126]">
-            Pickup requests
-          </h1>
-        </div>
-        <Link
-          href="/account/pickups/new"
-          className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#163e6a] px-4 text-[13px] font-semibold text-white hover:bg-[#ec8123]"
-        >
-          <Plus className="size-4" /> Request pickup
-        </Link>
-      </div>
-
-      <MerchantPickupsList initialPickups={pickups} />
-    </section>
-  );
+  return <section className="mx-auto max-w-300 px-5 py-10 lg:px-8 lg:py-12"><p className="mb-2 text-[11px] font-bold uppercase tracking-[0.17em] text-[#ec8123]">Merchant operations</p><h1 className="m-0 text-[clamp(28px,4vw,42px)] font-semibold text-[#202126]">Generate Load Sheet</h1><form className="mt-5 rounded-lg border border-[#e5e6e9] bg-white p-4 shadow-[0_5px_18px_rgba(24,25,30,0.04)]" method="get"><div className="flex flex-wrap items-end gap-7"><label className="grid gap-1 text-[12px] font-semibold text-[#686970]">From date<input className="h-9 rounded-md border border-[#cfd1d4] px-2.5 text-[13px] font-normal" name="from" type="date" defaultValue={from} /></label><label className="grid gap-1 text-[12px] font-semibold text-[#686970]">To date<input className="h-9 rounded-md border border-[#cfd1d4] px-2.5 text-[13px] font-normal" name="to" type="date" defaultValue={to} /></label><label className="grid min-w-70 flex-1 gap-1 text-[12px] font-semibold text-[#686970]">Vendor<select className="h-9 rounded-md border border-[#cfd1d4] bg-white px-2.5 text-[13px] font-normal" disabled defaultValue={merchant.id}><option value={merchant.id}>{merchant.companyName}</option></select></label><button className="h-9 rounded-md bg-[#337ab7] px-5 text-[13px] font-semibold text-white hover:bg-[#286090]" type="submit">Filter</button></div></form><LoadSheetTable rows={rows} riders={riders} /></section>;
 }

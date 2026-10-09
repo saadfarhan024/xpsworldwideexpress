@@ -23,22 +23,22 @@ export default async function AdminPage() {
         <article className="relative overflow-hidden rounded-2xl border border-[#e1e5ea] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.06)]">
           <span className="absolute inset-x-0 top-0 h-1 bg-[#ec8123]" aria-hidden="true" /><ClipboardList className="mb-5 size-6 text-[#ec8123]" aria-hidden="true" />
           <p className="m-0 text-[13px] font-bold text-[#3f4148]">Open pickups</p>
-          <p className="mb-0 mt-2 text-[36px] font-semibold text-[#163e6a]">{openPickups}</p>
+          <p className="mb-0 mt-2 !text-[46px] font-bold leading-none text-[#163e6a]">{openPickups}</p>
         </article>
         <article className="relative overflow-hidden rounded-2xl border border-[#e1e5ea] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.06)]">
           <span className="absolute inset-x-0 top-0 h-1 bg-[#163e6a]" aria-hidden="true" /><Boxes className="mb-5 size-6 text-[#163e6a]" aria-hidden="true" />
           <p className="m-0 text-[13px] font-bold text-[#3f4148]">Total shipments</p>
-          <p className="mb-0 mt-2 text-[36px] font-semibold text-[#163e6a]">{totalShipments}</p>
+          <p className="mb-0 mt-2 !text-[46px] font-bold leading-none text-[#163e6a]">{totalShipments}</p>
         </article>
         <article className="relative overflow-hidden rounded-2xl border border-[#e1e5ea] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.06)]">
           <span className="absolute inset-x-0 top-0 h-1 bg-[#e2b21d]" aria-hidden="true" /><UsersRound className="mb-5 size-6 text-[#b48700]" aria-hidden="true" />
           <p className="m-0 text-[13px] font-bold text-[#3f4148]">Pending merchants</p>
-          <p className="mb-0 mt-2 text-[36px] font-semibold text-[#163e6a]">{pendingApplications}</p>
+          <p className="mb-0 mt-2 !text-[46px] font-bold leading-none text-[#163e6a]">{pendingApplications}</p>
         </article>
         <article className="relative overflow-hidden rounded-2xl border border-[#e1e5ea] bg-white p-6 shadow-[0_8px_24px_rgba(24,25,30,0.06)]">
           <span className="absolute inset-x-0 top-0 h-1 bg-[#43a85b]" aria-hidden="true" /><BriefcaseBusiness className="mb-5 size-6 text-[#318044]" aria-hidden="true" />
           <p className="m-0 text-[13px] font-bold text-[#3f4148]">Active merchants</p>
-          <p className="mb-0 mt-2 text-[36px] font-semibold text-[#163e6a]">{activeMerchants}</p>
+          <p className="mb-0 mt-2 !text-[46px] font-bold leading-none text-[#163e6a]">{activeMerchants}</p>
         </article>
       </div>
       <div className="mt-7 flex flex-wrap gap-3">

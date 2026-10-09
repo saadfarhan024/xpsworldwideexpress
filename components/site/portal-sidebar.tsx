@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { BarChart3, Boxes, Cable, ChartNoAxesCombined, CircleUserRound, ClipboardList, FileClock, Landmark, LayoutDashboard, MessageSquareText, PackagePlus, Settings, ShieldCheck, Store, Ticket, Truck, Users } from "lucide-react";
+import { BarChart3, Boxes, Cable, ChartNoAxesCombined, CircleUserRound, ClipboardList, FileClock, Landmark, LayoutDashboard, MessageSquareText, PackagePlus, Settings, ShieldCheck, Store, Ticket, Truck, Users, SquarePlus } from "lucide-react";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import { SignOutButton } from "@/components/site/sign-out-button";
 
-const icons = { BarChart3, Boxes, Cable, ChartNoAxesCombined, CircleUserRound, ClipboardList, FileClock, Landmark, LayoutDashboard, MessageSquareText, PackagePlus, Settings, ShieldCheck, Store, Ticket, Truck, Users };
+const icons = { BarChart3, Boxes, Cable, ChartNoAxesCombined, SquarePlus, CircleUserRound, ClipboardList, FileClock, Landmark, LayoutDashboard, MessageSquareText, PackagePlus, Settings, ShieldCheck, Store, Ticket, Truck, Users };
 
 type PortalSidebarItem = { href: string; label: string; icon: keyof typeof icons };
 

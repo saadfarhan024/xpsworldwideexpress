@@ -62,6 +62,7 @@ export async function POST(request: Request) {
     requestedFor?: unknown;
     note?: unknown;
     shipmentIds?: unknown;
+    assignedToId?: unknown;
   };
 
   try {
@@ -76,6 +77,7 @@ export async function POST(request: Request) {
   const contactPhone = clean(body.contactPhone) || profile.phone;
   const timeWindow = clean(body.timeWindow) || null;
   const note = clean(body.note) || null;
+  const assignedToId = clean(body.assignedToId) || null;
   const rawRequestedFor = clean(body.requestedFor);
   const requestedFor = rawRequestedFor ? new Date(rawRequestedFor) : null;
 
@@ -107,6 +109,14 @@ export async function POST(request: Request) {
     }
   }
 
+  if (assignedToId) {
+    const rider = await prisma.user.findFirst({
+      where: { id: assignedToId, role: { in: ["ADMIN", "OPERATIONS"] }, status: "ACTIVE" },
+      select: { id: true },
+    });
+    if (!rider) return NextResponse.json({ message: "Selected rider is not available." }, { status: 400 });
+  }
+
   const created = await prisma.$transaction(async (tx) => {
     const pickup = await tx.pickupRequest.create({
       data: {
@@ -117,7 +127,8 @@ export async function POST(request: Request) {
         timeWindow,
         requestedFor,
         note,
-        status: "REQUESTED",
+        status: assignedToId ? "ASSIGNED" : "REQUESTED",
+        assignedToId,
         shipments: {
           create: eligibleShipments.map((s) => ({
             shipmentId: s.id,

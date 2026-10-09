@@ -66,6 +66,10 @@
   color: var(--sidebar-foreground);
 }
 
+.dashboard-scale :where(p, a, button, label, dt, dd, li, th, td) {
+  font-size: calc(1em + 1px) !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
