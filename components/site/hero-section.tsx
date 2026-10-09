@@ -6,7 +6,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative isolate h-[min(890px,92vh)] min-h-185 bg-cover bg-position-[center_55%] text-white motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500 max-[760px]:h-[min(760px,100svh)] max-[760px]:min-h-160 max-[760px]:max-h-none max-[760px]:bg-position-[58%_center] max-[420px]:min-h-155"
+      className="relative isolate h-[min(890px,92vh)] min-h-185 bg-cover bg-position-[center_55%] text-white motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500 max-[760px]:h-[min(700px,92svh)] max-[760px]:min-h-145 max-[760px]:max-h-none max-[760px]:bg-position-[58%_center] max-[420px]:min-h-140"
       style={{
         backgroundImage:
           "linear-gradient(90deg, rgb(12 12 15 / 78%) 0%, rgb(15 15 17 / 56%) 48%, rgb(10 12 15 / 48%) 100%), linear-gradient(0deg, rgb(5 7 10 / 38%), transparent 55%), url(https://xpsworldwideexpress.pk/img/theme_image_23.jpg)",
