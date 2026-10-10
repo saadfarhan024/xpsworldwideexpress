@@ -103,7 +103,7 @@ export function NewTicketForm() {
               className={`${inputClass} min-h-32 resize-y py-3`}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Provide as much detail as possible so our support team can resolve your query promptly…"
+              placeholder="Provide as much detail as possible so our team can review your feedback promptly…"
             />
           </label>
         </div>
@@ -121,7 +121,7 @@ export function NewTicketForm() {
           disabled={submitting}
           className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#163e6a] px-6 text-[13px] font-semibold text-white shadow-xs hover:bg-[#ec8123] disabled:opacity-50"
         >
-          {submitting ? "Opening ticket…" : "Submit ticket"} <ArrowRight className="size-4" />
+          {submitting ? "Submitting feedback…" : "Submit feedback"} <ArrowRight className="size-4" />
         </button>
       </div>
     </form>

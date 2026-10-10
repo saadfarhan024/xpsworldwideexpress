@@ -301,7 +301,7 @@ export function AdminRemittances() {
                                 </button>
                               )}
                               <Link
-                                href={`/account/remittances/${b.reference}`}
+                                href={`/admin/remittances/${b.reference}`}
                                 className="inline-flex items-center gap-1 rounded-md border border-[#dedfe2] px-2 py-1 text-[11px] font-semibold text-[#163e6a] hover:bg-[#f3f4f6]"
                               >
                                 <FileText className="size-3" /> Statement

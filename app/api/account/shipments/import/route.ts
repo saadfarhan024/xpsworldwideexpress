@@ -96,13 +96,13 @@ export async function POST(request: Request) {
     return -1;
   };
 
-  const recipientIdx = getColIdx("recipientname", "recipient", "name", "customer");
-  const phoneIdx = getColIdx("recipientphone", "phone", "contact", "mobile");
-  const addressIdx = getColIdx("deliveryaddress", "address", "destinationaddress");
-  const cityIdx = getColIdx("destinationcity", "city", "destination");
+  const recipientIdx = getColIdx("recipientname", "receivername", "recipient", "receiver", "name", "customer");
+  const phoneIdx = getColIdx("recipientphone", "receiverphone", "phone", "contact", "mobile");
+  const addressIdx = getColIdx("deliveryaddress", "receiveraddress", "address", "destinationaddress");
+  const cityIdx = getColIdx("destinationcity", "deliverycity", "city", "destination");
   const piecesIdx = getColIdx("pieces", "parcels", "quantity", "qty");
   const codIdx = getColIdx("codamount", "cod", "cashondelivery", "amount");
-  const descIdx = getColIdx("itemdescription", "description", "items", "item");
+  const descIdx = getColIdx("itemdescription", "productdescription", "description", "items", "item");
 
   if (recipientIdx === -1 || phoneIdx === -1 || addressIdx === -1 || cityIdx === -1) {
     return NextResponse.json(

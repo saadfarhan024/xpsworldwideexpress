@@ -8,7 +8,8 @@ export const metadata: Metadata = {
   description: "Track your Go Delivery Express shipment.",
 };
 
-export default function TrackingPage() {
+export default async function TrackingPage({ searchParams }: { searchParams: Promise<{ code?: string; trackingCode?: string }> }) {
+  const query = await searchParams;
   return (
     <main>
       <SiteHeader />
@@ -24,7 +25,7 @@ export default function TrackingPage() {
           <h1 className="m-0 text-[clamp(38px,5vw,60px)] font-medium leading-tight">Package Tracking</h1>
         </div>
       </section>
-      <TrackingForm />
+      <TrackingForm title="Track your package" initialTrackingCode={query.code ?? query.trackingCode ?? ""} />
       <SiteFooter />
     </main>
   );

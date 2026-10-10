@@ -72,7 +72,7 @@ export default async function MerchantTicketDetailPage({ params }: Props) {
         href="/account/tickets"
         className="mb-4 inline-flex items-center gap-2 text-[13px] font-medium text-[#62636a] hover:text-[#163e6a]"
       >
-        <ArrowLeft className="size-4" /> Back to tickets
+        <ArrowLeft className="size-4" /> Back to suggestions / complaints
       </Link>
 
       <div className="rounded-2xl border border-[#e5e6e9] bg-white p-6 shadow-xs">

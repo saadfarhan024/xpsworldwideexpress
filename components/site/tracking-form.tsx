@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { ArrowRight, CheckCircle2, Clock3, PackageSearch } from "lucide-react";
 
 type TrackingEvent = {
@@ -24,16 +24,15 @@ type TrackingResult = { code: string; shipment: TrackedShipment | null };
 
 const readableStatus = (status: string) => status.toLowerCase().replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 
-export function TrackingForm() {
-  const [trackingNumbers, setTrackingNumbers] = useState("");
+export function TrackingForm({ title = "Track your deliveries", initialTrackingCode = "" }: { title?: string; initialTrackingCode?: string }) {
+  const [trackingNumbers, setTrackingNumbers] = useState(initialTrackingCode);
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [results, setResults] = useState<TrackingResult[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const enteredNumbers = trackingNumbers.split(",").map((number) => number.trim()).filter(Boolean);
+  const lookup = async (value: string) => {
+    const enteredNumbers = value.split(/[\s,]+/).map((number) => number.trim()).filter(Boolean);
     const numbers = [...new Set(enteredNumbers)];
     setResults([]);
 
@@ -69,6 +68,18 @@ export function TrackingForm() {
     }
   };
 
+  useEffect(() => {
+    const code = initialTrackingCode.trim();
+    if (code) void lookup(code);
+    // The initial URL value should be consumed once when the page mounts.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialTrackingCode]);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    void lookup(trackingNumbers);
+  };
+
   return (
     <section className="bg-[#f6f6f7] px-5 py-18 max-[760px]:py-12">
       <div className="mx-auto max-w-175 rounded-2xl border border-[#e8e8eb] bg-white p-[clamp(24px,5vw,52px)] shadow-[0_16px_48px_rgba(23,24,30,0.08)]">
@@ -77,7 +88,7 @@ export function TrackingForm() {
             <PackageSearch className="size-6" aria-hidden="true" />
           </span>
           <div>
-            <h2 className="m-0 text-[25px] font-semibold text-[#202126]">Track Your Page</h2>
+            <h2 className="m-0 text-[25px] font-semibold text-[#202126]">{title}</h2>
             <p className="mb-0 mt-2 text-[14px] leading-6 text-[#6d6e74]">
               Track up to 10 numbers at a time. Separate by a comma (,)
             </p>

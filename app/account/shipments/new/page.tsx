@@ -2,10 +2,16 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ShipmentCreateForm } from "@/components/site/shipment-create-form";
 import { requireMerchant } from "@/lib/auth/session";
+import { prisma } from "@/lib/db";
 
 export default async function NewShipmentPage() {
   const user = await requireMerchant();
   const merchant = user.merchantProfile!;
+  const pickupProfiles = await prisma.pickupProfile.findMany({
+    where: { merchantId: merchant.id },
+    select: { id: true, shipperName: true, shipperPhone: true, shipperEmail: true, origin: true, shipperAddress: true },
+    orderBy: { createdAt: "desc" },
+  });
 
   return (
     <section className="mx-auto min-h-125 max-w-300 px-5 py-10 lg:px-8 lg:py-12">
@@ -13,7 +19,7 @@ export default async function NewShipmentPage() {
       <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.17em] text-[#163e6a]">Shipment details</p>
       <h1 className="m-0 text-[clamp(30px,4vw,42px)] font-semibold text-[#202126]">Create a shipment</h1>
       <p className="mb-8 mt-3 max-w-180 text-[14px] leading-6 text-[#686970]">Complete the order, pickup, delivery, parcel, and pricing details. A unique tracking code will be created when you save.</p>
-      <ShipmentCreateForm pickupDefaults={{ city: merchant.city, name: merchant.contactName, phone: merchant.phone, email: user.email, address: merchant.pickupAddress }} />
+      <ShipmentCreateForm pickupDefaults={{ city: merchant.city, name: merchant.contactName, phone: merchant.phone, email: user.email, address: merchant.pickupAddress }} pickupProfiles={pickupProfiles} />
     </section>
   );
 }

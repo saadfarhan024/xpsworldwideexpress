@@ -77,6 +77,14 @@ export async function POST(request: Request) {
   const codAmount = input.codAmount === "" || input.codAmount == null ? null : Number(input.codAmount);
   const pricing = calculateShipmentPricing({ productType, serviceType, pieces, weightKg, codAmount: codAmount ?? 0 });
 
+  if (pickupProfile) {
+    const profile = await prisma.pickupProfile.findFirst({
+      where: { id: pickupProfile, merchantId: user.merchantProfile.id },
+      select: { id: true },
+    });
+    if (!profile) return NextResponse.json({ message: "The selected pickup profile is unavailable." }, { status: 400 });
+  }
+
   if (!recipientName || recipientName.length > 160 || !recipientPhone || recipientPhone.length > 40 || (recipientEmail && recipientEmail.length > 254) || !deliveryAddress || deliveryAddress.length > 1000 || !destinationCity || destinationCity.length > 100 || !itemDescription || itemDescription.length > 500 || !Number.isInteger(pieces) || pieces < 1 || pieces > 100 || !Number.isFinite(weightKg) || weightKg <= 0 || weightKg > 1000 || (codAmount !== null && (!Number.isFinite(codAmount) || codAmount < 0 || codAmount > 100_000_000))) {
     return NextResponse.json({ message: "Check the order, pickup, delivery, parcel, and price details." }, { status: 400 });
   }

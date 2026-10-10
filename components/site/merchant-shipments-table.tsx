@@ -15,6 +15,7 @@ export type MerchantShipmentRow = {
   status: string;
   codAmount: number | null;
   createdAt: string;
+  source?: string;
 };
 
 export function MerchantShipmentsTable({ initialShipments }: { initialShipments: MerchantShipmentRow[] }) {
@@ -216,6 +217,7 @@ export function MerchantShipmentsTable({ initialShipments }: { initialShipments:
                   <th className="px-5 py-4 font-semibold">Destination</th>
                   <th className="px-5 py-4 font-semibold">Status</th>
                   <th className="px-5 py-4 font-semibold">Created</th>
+                  <th className="px-5 py-4 font-semibold">Source</th>
                   <th className="px-5 py-4 font-semibold">COD</th>
                   <th className="px-5 py-4 font-semibold text-right">Actions</th>
                 </tr>
@@ -241,6 +243,7 @@ export function MerchantShipmentsTable({ initialShipments }: { initialShipments:
                     <td className="px-5 py-3.5 text-[#77787e]">
                       {new Date(s.createdAt).toLocaleDateString()}
                     </td>
+                    <td className="px-5 py-3.5 text-[#77787e]">{s.source ?? "Merchant portal"}</td>
                     <td className="px-5 py-3.5 font-medium">
                       {s.codAmount ? `PKR ${s.codAmount.toFixed(2)}` : "—"}
                     </td>

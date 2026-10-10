@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 export type LoadSheetRow = { id: string; date: string; trackingCode: string; pickupInfo: string; deliveryInfo: string; quantity: number; pickupCity: string; deliveryCity: string; weight: number | null; codAmount: number | null; assignedRider?: string | null };
 const inputClass = "h-9 rounded-md border border-[#cfd1d4] bg-white px-2.5 text-[13px] text-[#45464b] outline-none focus:border-[#163e6a] focus:ring-2 focus:ring-[#163e6a]/10";
 
@@ -22,6 +24,9 @@ export function LoadSheetTable({ rows, riderId, riders = [] }: { rows: LoadSheet
   const clearVisible = () => setSelectedIds((current) => current.filter((id) => !visibleRows.some((row) => row.id === id)));
   const copyRows = async () => { await navigator.clipboard?.writeText(visibleRows.map((row) => [row.date, row.trackingCode, row.pickupInfo, row.deliveryInfo, row.quantity, row.pickupCity, row.deliveryCity, row.weight ?? "", row.codAmount ?? ""].join("\t")).join("\n")); };
   const downloadCsv = () => { const header = ["Date", "Tracking No", "Pickup Info", "Delivery Info", "Qty", "Pickup City", "Delivery City", "Weight", "COD Amount"]; const body = visibleRows.map((row) => [row.date, row.trackingCode, row.pickupInfo, row.deliveryInfo, row.quantity, row.pickupCity, row.deliveryCity, row.weight ?? "", row.codAmount ?? ""]); const csv = [header, ...body].map((line) => line.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\n"); const link = document.createElement("a"); link.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" })); link.download = "load-sheet.csv"; link.click(); URL.revokeObjectURL(link.href); };
+  
+  const router = useRouter()
+  
   const generateLoadSheet = async () => {
     if (!selectedRiderId) return setMessage("Select a rider first.");
     if (!selectedIds.length) return setMessage("Select at least one shipment.");
@@ -30,7 +35,7 @@ export function LoadSheetTable({ rows, riderId, riders = [] }: { rows: LoadSheet
       const response = await fetch("/api/account/pickups", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ shipmentIds: selectedIds, assignedToId: selectedRiderId }) });
       const data = await response.json() as { message?: string };
       if (!response.ok) throw new Error(data.message ?? "Could not generate load sheet.");
-      window.location.assign(`/account/load-sheets?rider=${encodeURIComponent(selectedRiderId)}`);
+      router.push(`/account/load-sheets?rider=${encodeURIComponent(selectedRiderId)}`);
     } catch (error) { setMessage(error instanceof Error ? error.message : "Could not generate load sheet."); setSaving(false); }
   };
   const printSlip = (row: LoadSheetRow) => {

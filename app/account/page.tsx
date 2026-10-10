@@ -52,7 +52,7 @@ export default async function AccountPage() {
             <p className="m-0 text-[11px] font-bold uppercase tracking-[0.15em] text-[#ec8123]">Shipment overview</p>
             <h2 className="mb-0 mt-1 text-[20px] font-semibold text-[#25262a]">Total orders: {stats.totalOrders}</h2>
           </div>
-          <Link className="inline-flex items-center gap-2 rounded-lg bg-[#163e6a] px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-[#ec8123]" href="/account/shipments">Track Orders <ArrowRight className="size-4" aria-hidden="true" /></Link>
+          <Link className="inline-flex items-center gap-2 rounded-lg bg-[#163e6a] px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-[#ec8123]" href="/account/orders">View Orders <ArrowRight className="size-4" aria-hidden="true" /></Link>
         </div>
         <div className="mt-6 grid grid-cols-3 gap-4 max-[1200px]:grid-cols-3 max-[900px]:grid-cols-2 max-[600px]:grid-cols-1">
           {stats.statuses.map((status) => (

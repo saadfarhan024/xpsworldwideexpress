@@ -16,12 +16,14 @@ function verifySignature(payload: string, signature: string | null, secret: stri
 }
 
 export async function POST(request: Request) {
-  const secret = process.env.CARRIER_WEBHOOK_SECRET || "development-carrier-secret-key-123";
+  const secret = process.env.CARRIER_WEBHOOK_SECRET || (process.env.NODE_ENV === "production" ? "" : "development-carrier-secret-key-123");
   const signature = request.headers.get("x-carrier-signature");
 
   const rawBody = await request.text();
 
-  // Signature validation (in production, strict check; in dev, logs if mismatch)
+  if (process.env.NODE_ENV === "production" && !secret) {
+    return NextResponse.json({ message: "Carrier webhook secret is not configured." }, { status: 503 });
+  }
   if (process.env.NODE_ENV === "production" && !verifySignature(rawBody, signature, secret)) {
     return NextResponse.json({ message: "Invalid webhook signature." }, { status: 401 });
   }

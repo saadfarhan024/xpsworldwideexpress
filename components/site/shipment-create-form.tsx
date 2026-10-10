@@ -19,12 +19,15 @@ function Field({ label, name, required, children, className = "" }: { label: str
 }
 
 type PickupDefaults = { city: string; name: string; phone: string; email: string; address: string };
+type PickupProfile = { id: string; shipperName: string; shipperPhone: string; shipperEmail: string; origin: string; shipperAddress: string };
 
-export function ShipmentCreateForm({ pickupDefaults }: { pickupDefaults: PickupDefaults }) {
+export function ShipmentCreateForm({ pickupDefaults, pickupProfiles }: { pickupDefaults: PickupDefaults; pickupProfiles: PickupProfile[] }) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [inputs, setInputs] = useState({ productType: "Parcel", serviceType: "Overnight", pieces: "1", weightKg: "0.5", codAmount: "0" });
+  const [selectedPickupProfile, setSelectedPickupProfile] = useState("");
+  const [pickup, setPickup] = useState(pickupDefaults);
   const pricing = useMemo(() => calculateShipmentPricing({ productType: inputs.productType, serviceType: inputs.serviceType, pieces: Number(inputs.pieces) || 1, weightKg: Number(inputs.weightKg) || 0.5, codAmount: Number(inputs.codAmount) || 0 }), [inputs]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
@@ -63,12 +66,12 @@ export function ShipmentCreateForm({ pickupDefaults }: { pickupDefaults: PickupD
 
     <div className="grid grid-cols-2 items-start gap-6 max-[1100px]:grid-cols-1">
       <Section title="Pickup Details"><div className="grid grid-cols-2 gap-4 max-[600px]:grid-cols-1">
-        <Field label="City/Area" name="pickupCity" required><input className={`${fieldClass} ${readonlyClass} cursor-not-allowed`} id="pickupCity" name="pickupCity" defaultValue={pickupDefaults.city} readOnly required /></Field>
-        <Field label="Select Profile" name="pickupProfile"><select className={fieldClass} id="pickupProfile" name="pickupProfile" defaultValue="Primary pickup profile"><option>Primary pickup profile</option></select></Field>
-        <Field label="Name" name="pickupName" required><input className={fieldClass} id="pickupName" name="pickupName" autoComplete="name" defaultValue={pickupDefaults.name} required /></Field>
-        <Field label="Phone" name="pickupPhone" required><input className={fieldClass} id="pickupPhone" name="pickupPhone" type="tel" autoComplete="tel" defaultValue={pickupDefaults.phone} required /></Field>
-        <Field label="Email" name="pickupEmail" required className="col-span-2 max-[600px]:col-span-1"><input className={fieldClass} id="pickupEmail" name="pickupEmail" type="email" autoComplete="email" defaultValue={pickupDefaults.email} required /></Field>
-        <Field label="Address" name="pickupAddress" required className="col-span-2 max-[600px]:col-span-1"><textarea className={`${fieldClass} h-auto min-h-20 resize-y py-3`} id="pickupAddress" name="pickupAddress" defaultValue={pickupDefaults.address} required /></Field>
+        <Field label="City/Area" name="pickupCity" required><input className={`${fieldClass} ${readonlyClass} cursor-not-allowed`} id="pickupCity" name="pickupCity" value={pickup.city} readOnly required /></Field>
+        <Field label="Select Profile" name="pickupProfile"><select className={fieldClass} id="pickupProfile" name="pickupProfile" value={selectedPickupProfile} onChange={(event) => { const id = event.target.value; setSelectedPickupProfile(id); const profile = pickupProfiles.find((candidate) => candidate.id === id); setPickup(profile ? { city: profile.origin, name: profile.shipperName, phone: profile.shipperPhone, email: profile.shipperEmail, address: profile.shipperAddress } : pickupDefaults); }}><option value="">Account default</option>{pickupProfiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.shipperName} · {profile.origin}</option>)}</select></Field>
+        <Field label="Name" name="pickupName" required><input className={fieldClass} id="pickupName" name="pickupName" autoComplete="name" value={pickup.name} onChange={(event) => setPickup({ ...pickup, name: event.target.value })} required /></Field>
+        <Field label="Phone" name="pickupPhone" required><input className={fieldClass} id="pickupPhone" name="pickupPhone" type="tel" autoComplete="tel" value={pickup.phone} onChange={(event) => setPickup({ ...pickup, phone: event.target.value })} required /></Field>
+        <Field label="Email" name="pickupEmail" required className="col-span-2 max-[600px]:col-span-1"><input className={fieldClass} id="pickupEmail" name="pickupEmail" type="email" autoComplete="email" value={pickup.email} onChange={(event) => setPickup({ ...pickup, email: event.target.value })} required /></Field>
+        <Field label="Address" name="pickupAddress" required className="col-span-2 max-[600px]:col-span-1"><textarea className={`${fieldClass} h-auto min-h-20 resize-y py-3`} id="pickupAddress" name="pickupAddress" value={pickup.address} onChange={(event) => setPickup({ ...pickup, address: event.target.value })} required /></Field>
         <Field label="Pickup Address" name="pickupAddressLine2" className="col-span-2 max-[600px]:col-span-1"><textarea className={`${fieldClass} h-auto min-h-20 resize-y py-3`} id="pickupAddressLine2" name="pickupAddressLine2" /></Field>
       </div></Section>
 

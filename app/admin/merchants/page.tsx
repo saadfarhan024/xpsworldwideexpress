@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AdminMerchantBank } from "@/components/site/admin-merchant-bank";
-import { requireAdminPortal } from "@/lib/auth/session";
+import { requireFinanceOrAdmin } from "@/lib/auth/session";
 
 export const metadata: Metadata = {
   title: "Merchants | Go Delivery Admin",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminMerchantsPage() {
-  await requireAdminPortal();
+  await requireFinanceOrAdmin();
 
   return (
     <section className="mx-auto max-w-300 px-5 py-12">

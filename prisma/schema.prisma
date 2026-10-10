@@ -108,11 +108,27 @@ model MerchantProfile {
   pickupRequests     PickupRequest[]
   supportTickets     SupportTicket[]
   remittances        Remittance[]
+  pickupProfiles     PickupProfile[]
   shopifyIntegration  ShopifyIntegration?
   shopifyOAuthStates  ShopifyOAuthState[]
 
   @@index([companyName])
   @@index([city])
+}
+
+model PickupProfile {
+  id             String   @id @default(cuid())
+  merchantId     String
+  shipperName    String
+  shipperPhone   String
+  shipperEmail   String
+  origin         String
+  shipperAddress String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  merchant       MerchantProfile @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@index([merchantId, createdAt])
 }
 
 model ShopifyIntegration {

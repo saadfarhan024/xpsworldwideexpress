@@ -44,17 +44,17 @@ export default async function MerchantTicketsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.17em] text-[#163e6a]">
-            Customer Support
+            Feedback desk
           </p>
           <h1 className="m-0 text-[clamp(30px,4vw,42px)] font-semibold text-[#202126]">
-            Support Tickets
+            Suggestions / Complaints
           </h1>
         </div>
         <Link
           href="/account/tickets/new"
           className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#163e6a] px-4 text-[13px] font-semibold text-white hover:bg-[#ec8123]"
         >
-          <Plus className="size-4" /> Open new ticket
+          <Plus className="size-4" /> Submit feedback
         </Link>
       </div>
 
@@ -107,15 +107,15 @@ export default async function MerchantTicketsPage() {
         ) : (
           <div className="px-6 py-14 text-center">
             <MessageSquare className="mx-auto size-10 text-[#a0a1a8]" />
-            <h2 className="mt-4 text-[19px] font-semibold text-[#202126]">No tickets opened yet</h2>
+            <h2 className="mt-4 text-[19px] font-semibold text-[#202126]">No suggestions or complaints yet</h2>
             <p className="mx-auto mb-6 mt-1 max-w-100 text-[13px] text-[#6d6e74]">
-              Have a question or need assistance with deliveries? Our support desk is ready to help.
+              Share a suggestion, report a delivery issue, or let us know how we can improve.
             </p>
             <Link
               href="/account/tickets/new"
               className="inline-flex min-h-11 items-center rounded-lg bg-[#163e6a] px-5 text-[13px] font-semibold text-white hover:bg-[#ec8123]"
             >
-              Open new ticket
+              Submit feedback
             </Link>
           </div>
         )}
